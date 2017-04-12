@@ -1,0 +1,21 @@
+<root>
+	<Properties>
+			<InWhichRoomEntityId>
+			<Type>	INT32		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+			</InWhichRoomEntityId>
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<BaseMethods>
+	</BaseMethods>
+
+	<CellMethods>
+
+	</CellMethods>
+
+</root>

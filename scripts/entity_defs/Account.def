@@ -1,0 +1,72 @@
+<root>
+	<Properties>
+		<nickName>
+			<Type>	UNICODE		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	None	</Default>
+			<Persistent>	true	</Persistent>
+		</nickName>
+	</Properties>
+
+	<ClientMethods>
+		<updateNum>
+			<Arg>	INT32	</Arg>
+		</updateNum>
+		<reqHallReady>
+			<Arg>	UNICODE	</Arg>
+		</reqHallReady>
+		<updateRoom>
+			<Arg>	RoomInfo	</Arg>
+		</updateRoom>
+		<getRoomList>
+			<Arg>	RoomInfoList	</Arg>
+		</getRoomList>
+		<InitRoomInfo>
+			<Arg>	PlayerInRoomList	</Arg>
+		</InitRoomInfo>
+		<UpdateRoomInfo>
+			<Arg>	InRoomUpdate	</Arg>
+		</UpdateRoomInfo>
+		<AddARoomInfo>
+			<Arg>	InRoomInit	</Arg>
+		</AddARoomInfo>
+	</ClientMethods>
+
+	<BaseMethods>
+		<onHallReady>
+			<Exposed/>
+		</onHallReady>
+		<changeNickName>
+			<Arg>	UNICODE	</Arg>
+			<Exposed/>
+		</changeNickName>
+		<createRoom>
+			<Arg>	UNICODE	</Arg>
+			<Arg>	INT8	</Arg>
+			<Arg>	ARRAY <of> INT8 </of>	</Arg>
+			<Exposed/>
+		</createRoom>
+		<enterRoomReq>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+			<Arg>	ARRAY <of> INT8 </of>	</Arg>
+			<Exposed/>
+		</enterRoomReq>
+		<setReady>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</setReady>
+		<leaveRoom>
+			<Exposed/>
+		</leaveRoom>
+	</BaseMethods>
+
+	<CellMethods>
+		
+		<createMonst>
+			<Exposed/>
+		</createMonst>
+	</CellMethods>
+
+</root>

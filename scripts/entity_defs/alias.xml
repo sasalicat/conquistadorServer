@@ -1,0 +1,71 @@
+<root>
+	<RoomInfo>FIXED_DICT
+		<Properties>
+			<roomId>
+				<Type> INT32 </Type>
+			</roomId>
+			<roomName>
+				<Type> UNICODE  </Type>
+			</roomName>
+			<playerNum>
+				<Type> INT8  </Type>
+			</playerNum>
+		</Properties>
+	</RoomInfo>
+	
+	<RoomInfoList>FIXED_DICT
+		<Properties>
+			<list>
+				<Type> ARRAY <of> RoomInfo </of> </Type>
+			</list>
+		</Properties>
+	</RoomInfoList>
+	
+	<InRoomUpdate>FIXED_DICT
+		<Properties>
+			<roleRoomId>
+				<Type> INT8</Type>
+			</roleRoomId>
+			<roleKind>
+				<Type> INT8</Type>
+			</roleKind>
+			<ready>
+				<Type>INT8</Type>
+			</ready>
+			<equipmentList>
+				<Type>	ARRAY <of> INT8 </of>	</Type>
+			</equipmentList>
+		</Properties>
+	</InRoomUpdate>
+	
+	<InRoomInit>FIXED_DICT
+		<Properties>
+			<roleRoomId>
+				<Type> INT8</Type>
+			</roleRoomId>
+			<roleKind>
+				<Type> INT8</Type>
+			</roleKind>
+			<ready>
+				<Type>INT8</Type>
+			</ready>
+			<name>
+				<Type>UNICODE</Type>
+			</name>
+			<equipmentList>
+				<Type>	ARRAY <of> INT8 </of>	</Type>
+			</equipmentList>
+		</Properties>
+	</InRoomInit>
+	
+	<PlayerInRoomList>FIXED_DICT
+		<Properties>
+			<list>
+				<Type> ARRAY <of> InRoomInit </of> </Type>
+			</list>
+			<selfRoomId>
+				<Type>INT8</Type>
+			</selfRoomId>
+		</Properties>
+	</PlayerInRoomList>
+</root>
