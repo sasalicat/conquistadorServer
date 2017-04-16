@@ -90,7 +90,9 @@ class Account(KBEngine.Proxy):
 		if self.InWhichRoomEntityId!=-1:
 			KBEngine.entities[self.InWhichRoomEntityId].LeaveRoom(self.id)
 			self.InWhichRoomEntityId=-1
-	def changeToPlayer(self):
-		player= KBEngine.createBaseLocally("Player",{"InWhichRoomEntityId":self.InWhichRoomEntityId})
+	def changeToPlayer(self,location):
+		self.client.changeToWar()
+		DEBUG_MSG(self.cellData["position"])
+		player= KBEngine.createBaseLocally("Player",{"InWhichRoomEntityId":self.InWhichRoomEntityId,"position":location,"selfsAccountId":self.id})
 		self.giveClientTo(player)
-		
+		return player.id

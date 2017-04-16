@@ -6,12 +6,21 @@
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
 			</InWhichRoomEntityId>
+			<selfsAccountId>
+			<Type>	INT32		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+			</selfsAccountId>
 	</Properties>
 
 	<ClientMethods>
 	</ClientMethods>
 
 	<BaseMethods>
+		<onChangeToWar>
+			<Exposed/>
+		</onChangeToWar>
 	</BaseMethods>
 
 	<CellMethods>

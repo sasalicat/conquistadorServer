@@ -30,6 +30,8 @@
 		<AddARoomInfo>
 			<Arg>	InRoomInit	</Arg>
 		</AddARoomInfo>
+		<changeToWar>
+		</changeToWar>
 	</ClientMethods>
 
 	<BaseMethods>

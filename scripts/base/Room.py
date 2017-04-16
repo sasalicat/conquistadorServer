@@ -1,4 +1,5 @@
 import KBEngine
+import locationData
 from PlayerInRoom import PlayerInRoom
 from KBEDebug import *
 
@@ -63,7 +64,19 @@ class Room(KBEngine.Base):
 				self.destroy()#销毁自己
 		#else:
 			#self.updateOut()
-			
+	def PlayerLeaveRoom(self,playId):
+		for item in self.Playerlist:
+			if item.playerGamingId == playId:
+				self.Playerlist.remove(item)
+				self.roomNoPoor.append(item.roomNo)
+				self.hall.delPlayer(KBEngine.entities[item.playerId])
+				break
+		self.updateOut()
+		if len(self.Playerlist)<1:#如果房间已经没有人
+			if self.cell!=None:#如果已经有cell实体则删除cell实体
+				self.destroyCellEntity()
+			else:
+				self.destroy()#销毁自己
 	def onLoseCell( self ):
 		self.destroy()
 	def setReady(self,roomId,TorF):
@@ -85,7 +98,9 @@ class Room(KBEngine.Base):
 		#開始遊戲
 		if allReady and len(self.Playerlist)>1:
 			for item in self.Playerlist:
-				KBEngine.entities[item.playerId].changeToPlayer()
+				item.playerGamingId= KBEngine.entities[item.playerId].changeToPlayer(locationData.initLocation[item.roomNo])
+				DEBUG_MSG("item.playerGamingId is %d" %item.playerGamingId)
+				
 	def noticeLeave(self,roomId):#告知客戶端有玩家離開房間
 		data={"roleRoomId":roomId,"roleKind":-1,"ready":False}#roleKind為-1代表玩家離開,可以省一個function
 
