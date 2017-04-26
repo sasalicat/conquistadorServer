@@ -12,19 +12,38 @@
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
 			</selfsAccountId>
+			<roomNo>
+			<Type>	INT8		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+			</roomNo>
 	</Properties>
 
 	<ClientMethods>
+		<updateZ>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT16	</Arg>
+		</updateZ>
+		<reqChangeReady>
+			<Arg> PlayerDataList </Arg>
+		</reqChangeReady>
+		
 	</ClientMethods>
 
 	<BaseMethods>
 		<onChangeToWar>
 			<Exposed/>
 		</onChangeToWar>
+		<updateZ>
+			<Arg>	INT16	</Arg>
+			<Exposed/>
+		</updateZ>
+		<onIdReady>
+			<Exposed/>
+		</onIdReady>
 	</BaseMethods>
-
 	<CellMethods>
-
 	</CellMethods>
 
 </root>

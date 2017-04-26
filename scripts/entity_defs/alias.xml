@@ -68,4 +68,16 @@
 			</selfRoomId>
 		</Properties>
 	</PlayerInRoomList>
+	
+	<PlayerData>FIXED_DICT
+		<Properties>
+			<roomNo>
+				<Type>INT8</Type>
+			</roomNo>
+			<eId>
+				<Type>INT32</Type>
+			</eId>
+		</Properties>
+	</PlayerData>
+	<PlayerDataList>	ARRAY <of> PlayerData </of>	</PlayerDataList>
 </root>

@@ -16,4 +16,16 @@ class Player(KBEngine.Proxy):
 		self.destroy()
 	
 	def onChangeToWar(self):
+		DEBUG_MSG("----------------------onChangeToWar OK")
+		playerList=KBEngine.entities[self.InWhichRoomEntityId].Playerlist
+		list=[]
+		for item in playerList:
+			list.append({"roomNo":item.roomNo,"eId":item.playerGamingId})
+		self.client.reqChangeReady(list)
+	
+	def updateZ(self,newz):
+		DEBUG_MSG("updateZ %d" %newz)
+		KBEngine.entities[self.InWhichRoomEntityId].updateAllZ(self.roomNo,newz)
+	def onIdReady(self):
+		DEBUG_MSG("onIdReady OK-----------------------")
 		self.createCellEntity(KBEngine.entities[self.InWhichRoomEntityId].cell)

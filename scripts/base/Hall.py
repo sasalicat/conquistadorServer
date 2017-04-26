@@ -32,7 +32,7 @@ class Hall(KBEngine.Base):
 	def delPlayer(self,theOld):
 		if theOld.id in self.playerIds:
 			self.playerIds.remove(theOld.id)
-		if theOld.id in self.playerIds:
+		if theOld.id in self.playerInHallIds:
 			self.playerInHallIds.remove(theOld.id)
 		
 	def onTimer(self, id, userArg):

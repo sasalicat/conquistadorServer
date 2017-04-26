@@ -98,6 +98,8 @@ class Room(KBEngine.Base):
 		#開始遊戲
 		if allReady and len(self.Playerlist)>1:
 			for item in self.Playerlist:
+				DEBUG_MSG("roomNo is%d" %item.roomNo)
+				DEBUG_MSG(locationData.initLocation[item.roomNo])
 				item.playerGamingId= KBEngine.entities[item.playerId].changeToPlayer(locationData.initLocation[item.roomNo])
 				DEBUG_MSG("item.playerGamingId is %d" %item.playerGamingId)
 				
@@ -106,3 +108,10 @@ class Room(KBEngine.Base):
 
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerId].client.UpdateRoomInfo(data)
+	def updateAllZ(self,roomNo,newZ):
+		
+		for item in self.Playerlist:
+			if not item.roomNo ==roomNo:
+				DEBUG_MSG("roomNo %d" %roomNo)
+				KBEngine.entities[item.playerGamingId].client.updateZ(roomNo,newZ)
+				
