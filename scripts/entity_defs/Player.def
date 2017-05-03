@@ -28,6 +28,15 @@
 		<reqChangeReady>
 			<Arg> PlayerDataList </Arg>
 		</reqChangeReady>
+		<receive1>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+		</receive1>
+		<receive2>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+			<Arg>	VECTOR3	</Arg>
+		</receive2>
 		
 	</ClientMethods>
 
@@ -40,10 +49,30 @@
 			<Exposed/>
 		</updateZ>
 		<onIdReady>
+			
 			<Exposed/>
 		</onIdReady>
+		<notify1>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</notify1>
 	</BaseMethods>
 	<CellMethods>
+		<notify1>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</notify1>
+		<notify2>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+			<Arg>	VECTOR3	</Arg>
+			<Exposed/>
+		</notify2>
+		<setRoomId>
+			<Arg>	INT32	</Arg>
+		</setRoomId>
 	</CellMethods>
 
 </root>

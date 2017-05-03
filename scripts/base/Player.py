@@ -29,3 +29,12 @@ class Player(KBEngine.Proxy):
 	def onIdReady(self):
 		DEBUG_MSG("onIdReady OK-----------------------")
 		self.createCellEntity(KBEngine.entities[self.InWhichRoomEntityId].cell)
+		#self.cell.InWhichRoomEntityId=self.InWhichRoomEntityId
+	def notify1(self,roomNo,action):
+		playerList=KBEngine.entities[self.InWhichRoomEntityId].Playerlist
+		for item in playerList:
+			if not item.roomNo == roomNo:
+				KBEngine.entities[item.playerGamingId].client.receive1(roomNo,action)
+	def onGetCell( self ):
+		self.cell.setRoomId(self.InWhichRoomEntityId)
+	
