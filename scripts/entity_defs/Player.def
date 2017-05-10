@@ -37,7 +37,11 @@
 			<Arg>	INT8	</Arg>
 			<Arg>	VECTOR3	</Arg>
 		</receive2>
-		
+		<receive3>
+			<Arg>	INT8	</Arg>
+			<Arg>	VECTOR3	</Arg>
+			<Arg>	VECTOR3	</Arg>
+		</receive3>
 	</ClientMethods>
 
 	<BaseMethods>
@@ -70,6 +74,12 @@
 			<Arg>	VECTOR3	</Arg>
 			<Exposed/>
 		</notify2>
+		<notify3>
+			<Arg>	INT8	</Arg>
+			<Arg>	VECTOR3	</Arg>
+			<Arg>	VECTOR3	</Arg>
+			<Exposed/>
+		</notify3>
 		<setRoomId>
 			<Arg>	INT32	</Arg>
 		</setRoomId>

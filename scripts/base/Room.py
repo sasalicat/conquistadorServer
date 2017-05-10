@@ -104,7 +104,7 @@ class Room(KBEngine.Base):
 				DEBUG_MSG("item.playerGamingId is %d" %item.playerGamingId)
 				
 	def noticeLeave(self,roomId):#告知客戶端有玩家離開房間
-		data={"roleRoomId":roomId,"roleKind":-1,"ready":False}#roleKind為-1代表玩家離開,可以省一個function
+		data={"roleRoomId":roomId,"roleKind":-1,"ready":False,"equipmentList":None}#roleKind為-1代表玩家離開,可以省一個function
 
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerId].client.UpdateRoomInfo(data)
