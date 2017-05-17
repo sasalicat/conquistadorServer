@@ -41,6 +41,7 @@
 			<Arg>	INT8	</Arg>
 			<Arg>	VECTOR3	</Arg>
 			<Arg>	VECTOR3	</Arg>
+			<Arg>	INT8	</Arg>
 		</receive3>
 	</ClientMethods>
 
