@@ -15,9 +15,9 @@ class Player(KBEngine.Entity):
 	def notify3(self,expose,equipmentIndex,playerPos,mousePos):
 		randomNum=random.randint(0,99)
 		self.allClients.receive3(equipmentIndex,playerPos,mousePos,randomNum)
-	def notify4(self,expose,playerPos,damagerPos,damagerNo,kind,num,stiff,makeConversaly,hitConversaly):
+	def notify4(self,expose,playerPos,eulerAngles,damagerPos,damagerNo,kind,num,stiff,makeConversaly,hitConversaly):
 		randomNum=random.randint(0,99)
-		self.allClients.receive4(playerPos,damagerPos,damagerNo,kind,num,stiff,makeConversaly,hitConversaly,randomNum)
+		self.allClients.receive4(playerPos,eulerAngles,damagerPos,damagerNo,kind,num,stiff,makeConversaly,hitConversaly,randomNum)
 	def setRoomId(self,roomId):
 		DEBUG_MSG("set roomId %d" %roomId)
 		self.InWhichRoomEntityId=roomId

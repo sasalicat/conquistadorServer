@@ -105,6 +105,7 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</notify4>
+
 		<setRoomId>
 			<Arg>	INT32	</Arg>
 		</setRoomId>
