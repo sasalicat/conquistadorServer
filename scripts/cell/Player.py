@@ -8,8 +8,8 @@ class Player(KBEngine.Entity):
 	def __init__(self):
 		DEBUG_MSG("players cell init !!!%d" %self.InWhichRoomEntityId)
 	
-	def notify1(self,expose,roomNo,action):
-		self.allClients.receive1(roomNo,action)
+	def notify1(self,expose,Pos,action):
+		self.allClients.receive1(Pos,action)
 	def notify2(self,expose,roomNo,action,dirZ):
 		self.allClients.receive2(roomNo,action,dirZ)
 	def notify3(self,expose,equipmentIndex,playerPos,mousePos):

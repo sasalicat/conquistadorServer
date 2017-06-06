@@ -29,7 +29,7 @@
 			<Arg> PlayerDataList </Arg>
 		</reqChangeReady>
 		<receive1>
-			<Arg>	INT8	</Arg>
+			<Arg>	VECTOR2	</Arg>
 			<Arg>	INT8	</Arg>
 		</receive1>
 		<receive2>
@@ -77,7 +77,7 @@
 	</BaseMethods>
 	<CellMethods>
 		<notify1>
-			<Arg>	INT8	</Arg>
+			<Arg>	VECTOR2	</Arg>
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</notify1>
