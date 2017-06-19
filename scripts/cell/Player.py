@@ -7,7 +7,8 @@ class Player(KBEngine.Entity):
 	InWhichRoomEntityId=-1
 	def __init__(self):
 		DEBUG_MSG("players cell init !!!%d" %self.InWhichRoomEntityId)
-	
+	def updateZ(self,expose,newz):
+		self.allClients.updateZ(newz)
 	def notify1(self,expose,Pos,action):
 		self.allClients.receive1(Pos,action)
 	def notify2(self,expose,roomNo,action,dirZ):

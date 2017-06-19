@@ -22,7 +22,6 @@
 
 	<ClientMethods>
 		<updateZ>
-			<Arg>	INT8	</Arg>
 			<Arg>	INT16	</Arg>
 		</updateZ>
 		<reqChangeReady>
@@ -61,10 +60,7 @@
 		<onChangeToWar>
 			<Exposed/>
 		</onChangeToWar>
-		<updateZ>
-			<Arg>	INT16	</Arg>
-			<Exposed/>
-		</updateZ>
+
 		<onIdReady>
 			
 			<Exposed/>
@@ -76,6 +72,10 @@
 		</notify1>
 	</BaseMethods>
 	<CellMethods>
+		<updateZ>
+			<Arg>	INT16	</Arg>
+			<Exposed/>
+		</updateZ>
 		<notify1>
 			<Arg>	VECTOR2	</Arg>
 			<Arg>	INT8	</Arg>
