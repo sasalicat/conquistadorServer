@@ -23,9 +23,9 @@ class Player(KBEngine.Proxy):
 			list.append({"roomNo":item.roomNo,"eId":item.playerGamingId})
 		self.client.reqChangeReady(list)
 	
-	def updateZ(self,newz):
-		DEBUG_MSG("updateZ %d" %newz)
-		KBEngine.entities[self.InWhichRoomEntityId].updateAllZ(self.roomNo,newz)
+	def notifyFinish(self):
+		KBEngine.entities[self.InWhichRoomEntityId].notifyfinish(self.roomNo)
+		
 	def onIdReady(self):
 		DEBUG_MSG("onIdReady OK-----------------------")
 		self.createCellEntity(KBEngine.entities[self.InWhichRoomEntityId].cell)

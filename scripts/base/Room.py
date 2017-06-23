@@ -114,4 +114,6 @@ class Room(KBEngine.Base):
 			if not item.roomNo ==roomNo:
 				DEBUG_MSG("roomNo %d" %roomNo)
 				KBEngine.entities[item.playerGamingId].client.updateZ(roomNo,newZ)
-				
+	def notifyfinish(self,roomId):
+		for item in self.Playerlist:
+			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)

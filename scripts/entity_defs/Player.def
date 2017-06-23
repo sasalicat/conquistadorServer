@@ -54,6 +54,9 @@
 			<Arg>	INT8	</Arg>
 			<Arg>	INT8	</Arg>
 		</receive4>
+		<getFinish>
+			<Arg>	INT8	</Arg>
+		</getFinish>
 	</ClientMethods>
 
 	<BaseMethods>
@@ -70,6 +73,9 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</notify1>
+		<notifyFinish>
+			<Exposed/>
+		</notifyFinish>
 	</BaseMethods>
 	<CellMethods>
 		<updateZ>

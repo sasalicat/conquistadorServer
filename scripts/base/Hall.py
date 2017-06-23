@@ -72,3 +72,4 @@ class Hall(KBEngine.Base):
 			list.append(data)
 		datas={"list":list}
 		asker.client.getRoomList(datas)
+		
