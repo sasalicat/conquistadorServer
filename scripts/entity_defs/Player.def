@@ -57,6 +57,8 @@
 		<getFinish>
 			<Arg>	INT8	</Arg>
 		</getFinish>
+		<intervalTrigger>
+		</intervalTrigger>
 	</ClientMethods>
 
 	<BaseMethods>

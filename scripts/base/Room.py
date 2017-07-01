@@ -8,6 +8,7 @@ class Room(KBEngine.Base):
 		self.hall=KBEngine.globalData["Hall"]
 		self.Playerlist=[]
 		self.roomNoPoor=[]
+		self.finishNum=0;
 		if self.masterId == -1:
 			DEBUG_MSG("MasterId is -1!!!")
 		else:
@@ -115,5 +116,14 @@ class Room(KBEngine.Base):
 				DEBUG_MSG("roomNo %d" %roomNo)
 				KBEngine.entities[item.playerGamingId].client.updateZ(roomNo,newZ)
 	def notifyfinish(self,roomId):
+		self.finishNum=self.finishNum+1;
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)
+		if self.finishNum >=len(self.Playerlist):
+			self.addTimer(0.1,0.1,1)
+	
+	def onTimer( self, timerHandle, userData ):
+		if userData==1:
+			DEBUG_MSG("ontimer userData=1")
+			for item in self.Playerlist:
+				KBEngine.entities[item.playerGamingId].client.intervalTrigger()
