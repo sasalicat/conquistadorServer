@@ -59,6 +59,8 @@
 		</getFinish>
 		<intervalTrigger>
 		</intervalTrigger>
+		<reqmsTask>
+		</reqmsTask>
 	</ClientMethods>
 
 	<BaseMethods>
@@ -78,6 +80,9 @@
 		<notifyFinish>
 			<Exposed/>
 		</notifyFinish>
+		<msTask>
+			<Exposed/>
+		</msTask>
 	</BaseMethods>
 	<CellMethods>
 		<updateZ>

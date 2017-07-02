@@ -38,3 +38,6 @@ class Player(KBEngine.Proxy):
 	def onGetCell( self ):
 		self.cell.setRoomId(self.InWhichRoomEntityId)
 	
+	def msTask(self):
+		self.client.reqmsTask();
+	
