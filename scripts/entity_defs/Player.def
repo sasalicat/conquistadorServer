@@ -83,6 +83,9 @@
 		<msTask>
 			<Exposed/>
 		</msTask>
+		<compulsiveLeaveRoom>
+			<Exposed/>
+		</compulsiveLeaveRoom>
 	</BaseMethods>
 	<CellMethods>
 		<updateZ>

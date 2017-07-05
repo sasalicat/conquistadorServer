@@ -124,6 +124,6 @@ class Room(KBEngine.Base):
 	
 	def onTimer( self, timerHandle, userData ):
 		if userData==1:
-			DEBUG_MSG("ontimer userData=1")
+			#DEBUG_MSG("ontimer userData=1")
 			for item in self.Playerlist:
 				KBEngine.entities[item.playerGamingId].client.intervalTrigger()

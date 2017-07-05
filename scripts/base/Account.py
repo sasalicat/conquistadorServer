@@ -38,8 +38,8 @@ class Account(KBEngine.Proxy):
 		客户端登陆失败时会回调到这里
 		"""
 		INFO_MSG(ip, port, password)
-		return KBEngine.LOG_ON_ACCEPT
-		
+		#return KBEngine.LOG_ON_ACCEPT
+		KBEngine.LOG_ON_REJECT
 	def onClientDeath(self):
 		"""
 		KBEngine method.

@@ -12,6 +12,7 @@ class Player(KBEngine.Proxy):
 			self.destroyCellEntity()
 		else:
 			self.destroy()#销毁自己
+	
 	def onLoseCell( self ):
 		self.destroy()
 	
@@ -36,8 +37,17 @@ class Player(KBEngine.Proxy):
 			if not item.roomNo == roomNo:
 				KBEngine.entities[item.playerGamingId].client.receive1(roomNo,action)
 	def onGetCell( self ):
-		self.cell.setRoomId(self.InWhichRoomEntityId)
+		if self.InWhichRoomEntityId!=-1:
+			self.cell.setRoomId(self.InWhichRoomEntityId)
 	
 	def msTask(self):
 		self.client.reqmsTask();
 	
+	def compulsiveLeaveRoom(self):
+		KBEngine.entities[self.InWhichRoomEntityId].PlayerLeaveRoom(self.id)
+		KBEngine.entities[self.selfsAccountId].InWhichRoomEntityId=-1#设置Account的inwhichroomEntityId
+		self.InWhichRoomEntityId=-1#设置为-1和掉线做区分
+		self.giveClientTo(KBEngine.entities[self.selfsAccountId])
+		self.destroyCellEntity()
+		DEBUG_MSG("compulsive Leave!!!")
+		
