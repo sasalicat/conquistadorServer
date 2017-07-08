@@ -72,18 +72,18 @@ class Account(KBEngine.Proxy):
 	def createRoom(self,roomName,roleKind,equipList):
 		self.InWhichRoomEntityId=KBEngine.globalData["Hall"].createRoom(roomName,self.id,roleKind,equipList)
 		DEBUG_MSG("RoomName Receive:%s !!!!!" %roomName)
-	def enterRoomReq(self,roomId,roleKind,equipList): 
+	def enterRoomReq(self,roomNo,roleKind,equipList): 
 		roomlist=KBEngine.globalData["Hall"].rooms
 		for roomInfo in roomlist:
-			if roomInfo.roomId==roomId:
+			if roomInfo.roomNo==roomNo:
 				self.InWhichRoomEntityId=roomInfo.EntityId
 				KBEngine.entities[roomInfo.EntityId].EnterRoom(self.id,roleKind,equipList)
 				break
 	#----------------------------------------------------------房間內的函數-----------------------------------------------------------
-	def setReady(self,roomId,TorF):
+	def setReady(self,roomNo,TorF):
 		DEBUG_MSG("readyset is called!!!")
 		if self.InWhichRoomEntityId!=-1:
-			KBEngine.entities[self.InWhichRoomEntityId].setReady(roomId,TorF)
+			KBEngine.entities[self.InWhichRoomEntityId].setReady(roomNo,TorF)
 		else:
 			DEBUG_MSG("on setReady inwhich is -1")
 	def leaveRoom(self):

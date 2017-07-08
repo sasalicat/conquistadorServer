@@ -11,7 +11,7 @@ class Hall(KBEngine.Base):
 				
 		self.playerIds=[]#在线玩家的列表
 		self.playerInHallIds=[]#沒有在房間的玩家列表,用於送roomList
-		self.roomIdPoor=[]#用于存放被摧毁房间的id,当新的房间创建时,如果此列表不为空,则优先使用此列表的项目
+		self.roomNoPoor=[]#用于存放被摧毁房间的No,当新的房间创建时,如果此列表不为空,则优先使用此列表的项目
 		self.rooms=[]#roomInformation形態陣列
 				
 		self.addTimer(5,5,1)
@@ -48,27 +48,35 @@ class Hall(KBEngine.Base):
 		for item in  self.playerInHallIds:
 			#DEBUG_MSG(KBEngine.entities[self.playerIds[i]])
 			KBEngine.entities[item].sendNumToClient(len(self.playerInHallIds))
-	def updateRoom(self,roomId,roomName,playerNum):
+	def updateRoom(self,roomNo,roomName,playerNum):
 		for item in self.rooms:
-			if item.roomId==roomId:
+			if item.roomNo==roomNo:
 				item.name=roomName
 				item.num=playerNum
-		data={'roomId':roomId,'roomName':roomName,'playerNum':playerNum}
+		data={'roomId':roomNo,'roomName':roomName,'playerNum':playerNum}
 		DEBUG_MSG(self.playerIds)
 		for pid in self.playerInHallIds:
 			DEBUG_MSG("in updateRoom pid is %d" %pid)
 			KBEngine.entities[pid].updateRoom(data)
 	def createRoom(self,roomName,playerId,roleKind,equipmentList):#rolekind是房主的角色類型編號
-		newid=len(self.rooms)#新房间的id预设为rooms长度
-		if(len(self.roomIdPoor)>0):#如果roomidpoor有剩余优先使用roomidpoor
-			newid=self.roomIdPoor.pop(0)
-		newRoom=KBEngine.createBaseLocally("Room",{"roomName":roomName,"roomId":newid,"masterId":playerId,"masterKind":roleKind,"mequipmentList":equipmentList})
-		self.rooms.append(RoomInformation(newRoom.id,newid,roomName,1))
+		newNo=len(self.rooms)#新房间的id预设为rooms长度
+		if(len(self.roomNoPoor)>0):#如果roomNoPoor有剩余优先使用roomNoPoor
+			newNo=self.roomNoPoor.pop(0)
+		newRoom=KBEngine.createBaseLocally("Room",{"roomName":roomName,"roomId":newNo,"masterId":playerId,"masterKind":roleKind,"mequipmentList":equipmentList})
+		self.rooms.append(RoomInformation(newRoom.id,newNo,roomName,1))
 		return newRoom.id;
+	def wirteOffRoom(self,roomNo):#此方法用来在删除放假时,释放roomNo进idPoor,roomNo为room在创造时获得的roomNo
+		DEBUG_MSG("注销房间")
+		for item in self.rooms:
+			if item.roomNo==roomNo:
+				DEBUG_MSG("注销了%d" %item.roomNo)
+				self.rooms.remove(item)
+				self.roomNoPoor.append(roomNo)
+				break
 	def sendRoomInfos(self,asker):#asker是Account形態
 		list=[]
 		for item in self.rooms:
-			data={"roomId":item.roomId,"roomName":item.name,"playerNum":item.num}
+			data={"roomId":item.roomNo,"roomName":item.name,"playerNum":item.num}
 			list.append(data)
 		datas={"list":list}
 		asker.client.getRoomList(datas)

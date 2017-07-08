@@ -45,7 +45,7 @@ class Room(KBEngine.Base):
 		playerInRoomList={"list":list,"selfRoomId":newRoomNo};
 		KBEngine.entities[newPlayerId].client.InitRoomInfo(playerInRoomList)
 		self.updateOut()
-	def LeaveRoom(self,PlayId):
+	def LeaveRoom(self,PlayId):#被Account.py呼叫
 		for item in self.Playerlist:
 			if item.playerId==PlayId:
 				tempid=item.roomNo
@@ -62,10 +62,11 @@ class Room(KBEngine.Base):
 			if self.cell!=None:#如果已经有cell实体则删除cell实体
 				self.destroyCellEntity()
 			else:
+				self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
 				self.destroy()#销毁自己
 		#else:
 			#self.updateOut()
-	def PlayerLeaveRoom(self,playId):
+	def PlayerLeaveRoom(self,playId):#用于游戏中强制退出房间,被Player.py呼叫
 		for item in self.Playerlist:
 			if item.playerGamingId == playId:
 				self.Playerlist.remove(item)
@@ -76,15 +77,19 @@ class Room(KBEngine.Base):
 		if len(self.Playerlist)<1:#如果房间已经没有人
 			if self.cell!=None:#如果已经有cell实体则删除cell实体
 				self.destroyCellEntity()
+				
 			else:
 				self.destroy()#销毁自己
+				self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
+				
 	def onLoseCell( self ):
 		self.destroy()
-	def setReady(self,roomId,TorF):
-		DEBUG_MSG("for roomId is%d" %roomId)
+		self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
+	def setReady(self,roomNo,TorF):
+		DEBUG_MSG("for roomNo is%d" %roomNo)
 		data={}
 		for item in self.Playerlist:
-			if item.roomNo==roomId:
+			if item.roomNo==roomNo:
 				DEBUG_MSG("item roomNo is%d" %item.roomNo)
 				item.ready=TorF
 				data={"roleRoomId":item.roomNo,"roleKind":item.roleKind,"ready":TorF,"equipmentList":item.equipmentList}
@@ -105,7 +110,7 @@ class Room(KBEngine.Base):
 				DEBUG_MSG("item.playerGamingId is %d" %item.playerGamingId)
 				
 	def noticeLeave(self,roomId):#告知客戶端有玩家離開房間
-		data={"roleRoomId":roomId,"roleKind":-1,"ready":False,"equipmentList":None}#roleKind為-1代表玩家離開,可以省一個function
+		data={"roleRoomId":roomId,"roleKind":-1,"ready":False,"equipmentList":[]}#roleKind為-1代表玩家離開,可以省一個function
 
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerId].client.UpdateRoomInfo(data)
