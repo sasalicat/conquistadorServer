@@ -37,6 +37,7 @@ class Account(KBEngine.Proxy):
 		KBEngine method.
 		客户端登陆失败时会回调到这里
 		"""
+		DEBUG_MSG("What")
 		INFO_MSG(ip, port, password)
 		#return KBEngine.LOG_ON_ACCEPT
 		return KBEngine.LOG_ON_REJECT
@@ -45,7 +46,7 @@ class Account(KBEngine.Proxy):
 		KBEngine method.
 		客户端对应实体已经销毁
 		"""
-		DEBUG_MSG("Account[%i].onClientDeath:" % self.id)
+		DEBUG_MSG("###############Account[%i].onClientDeath:" % self.id)
 		KBEngine.globalData["Hall"].delPlayer(self)#從大廳刪除玩家!!!!!
 		if self.InWhichRoomEntityId!=-1:
 			KBEngine.entities[self.InWhichRoomEntityId].LeaveRoom(self.id)

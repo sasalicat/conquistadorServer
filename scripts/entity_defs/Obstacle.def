@@ -1,34 +1,11 @@
 <root>
 	<Properties>
-		<roomName>
-			<Type>	UNICODE		</Type>
-			<Flags>	BASE	</Flags>
-			<Default>	'無!!!'	</Default>
-			<Persistent>	false	</Persistent>
-		</roomName>
-		<roomId>
-			<Type>	INT32		</Type>
-			<Flags>	BASE	</Flags>
+		<kind>
+			<Type>	INT8	</Type>
+			<Flags>	ALL_CLIENTS	</Flags>
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
-		</roomId>
-		<masterId>
-			<Type>	INT32		</Type>
-			<Flags>	BASE	</Flags>
-			<Default>	-1	</Default>
-			<Persistent>	false	</Persistent>
-		</masterId>
-		<masterKind>
-			<Type>	INT8		</Type>
-			<Flags>	BASE	</Flags>
-			<Default>	-1	</Default>
-			<Persistent>	false	</Persistent>
-		</masterKind>
-		<mequipmentList>
-			<Type> ARRAY <of> INT8 </of> </Type>
-			<Flags>	BASE	</Flags>
-			<Persistent>	false	</Persistent>
-		</mequipmentList>
+		</kind>
 	</Properties>
 
 	<ClientMethods>

@@ -9,10 +9,12 @@ class Player(KBEngine.Proxy):
 	def onClientDeath(self):
 		KBEngine.entities[self.InWhichRoomEntityId].PlayerLeaveRoom(self.id)
 		if self.cell!=None:#如果已经有cell实体则删除cell实体
+			DEBUG_MSG("cell!=None-----------------------------")
 			self.destroyCellEntity()
 		else:
 			self.destroy()#销毁自己
-	
+		KBEngine.entities[self.selfsAccountId].onClientDeath()
+		
 	def onLoseCell( self ):
 		self.destroy()
 	
