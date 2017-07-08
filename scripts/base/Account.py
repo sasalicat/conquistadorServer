@@ -39,7 +39,7 @@ class Account(KBEngine.Proxy):
 		"""
 		INFO_MSG(ip, port, password)
 		#return KBEngine.LOG_ON_ACCEPT
-		KBEngine.LOG_ON_REJECT
+		return KBEngine.LOG_ON_REJECT
 	def onClientDeath(self):
 		"""
 		KBEngine method.
