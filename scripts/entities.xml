@@ -11,5 +11,5 @@
 	<Hall hasClient="false"></Hall>
 	<Room hasClient="false" hasCell="true"></Room>
 	<Player hasClient="true" hasCell="true" hasBase="true"></Player>
-	<!--<Obstacle hasClient="true" hasCell="true" hasBase="true"></Obstacle>-->
+	<Obstacle hasClient="true" hasCell="true" hasBase="true"></Obstacle>
 </root>

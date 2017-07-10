@@ -8,7 +8,8 @@ class Room(KBEngine.Base):
 		self.hall=KBEngine.globalData["Hall"]
 		self.Playerlist=[]
 		self.roomNoPoor=[]
-		self.finishNum=0;
+		self.finishNum=0;#用于记录加载完成的玩家
+		self.ChangedNum=0;#用于记录切换页面完成的玩家
 		if self.masterId == -1:
 			DEBUG_MSG("MasterId is -1!!!")
 		else:
@@ -103,6 +104,11 @@ class Room(KBEngine.Base):
 				allReady=False
 		#開始遊戲
 		if allReady and len(self.Playerlist)>1:
+			#创造障碍物
+			for i in range(len(locationData.obstacleKind)):
+				KBEngine.createBaseAnywhere("Obstacle",{"position":locationData.obstacleLocation[i],"SpaceId":self.id,"kind":locationData.obstacleKind[i]})
+					
+			#通知玩家换页
 			for item in self.Playerlist:
 				DEBUG_MSG("roomNo is%d" %item.roomNo)
 				DEBUG_MSG(locationData.initLocation[item.roomNo])
@@ -121,6 +127,7 @@ class Room(KBEngine.Base):
 				DEBUG_MSG("roomNo %d" %roomNo)
 				KBEngine.entities[item.playerGamingId].client.updateZ(roomNo,newZ)
 	def notifyfinish(self,roomId):
+		DEBUG_MSG("notitfy Finish")
 		self.finishNum=self.finishNum+1;
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)
@@ -132,3 +139,5 @@ class Room(KBEngine.Base):
 			#DEBUG_MSG("ontimer userData=1")
 			for item in self.Playerlist:
 				KBEngine.entities[item.playerGamingId].client.intervalTrigger()
+
+				

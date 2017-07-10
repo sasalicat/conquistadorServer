@@ -1,11 +1,23 @@
 <root>
 	<Properties>
+		<Hp>
+			<Type>	INT16	</Type>
+			<Flags>	ALL_CLIENTS	</Flags>
+			<Default>	1000	</Default>
+			<Persistent>	false	</Persistent>
+		</Hp>
 		<kind>
 			<Type>	INT8	</Type>
 			<Flags>	ALL_CLIENTS	</Flags>
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
 		</kind>
+		<SpaceId>
+			<Type>	INT32		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</SpaceId>
 	</Properties>
 
 	<ClientMethods>
