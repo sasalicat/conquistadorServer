@@ -27,7 +27,10 @@
 	</BaseMethods>
 
 	<CellMethods>
-
+		<reduceHp>
+			<Arg>	INT16	</Arg>
+			<Exposed/>
+		</reduceHp>
 	</CellMethods>
 
 </root>
