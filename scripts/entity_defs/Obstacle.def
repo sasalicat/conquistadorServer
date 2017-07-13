@@ -12,6 +12,12 @@
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
 		</kind>
+		<createrNo>
+			<Type>	INT8	</Type>
+			<Flags>	ALL_CLIENTS	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</createrNo>
 		<SpaceId>
 			<Type>	INT32		</Type>
 			<Flags>	BASE	</Flags>
@@ -21,9 +27,17 @@
 	</Properties>
 
 	<ClientMethods>
+		<methodNull>
+			<Exposed/>
+		</methodNull>
+		<methodSbyte>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</methodSbyte>
 	</ClientMethods>
 
 	<BaseMethods>
+
 	</BaseMethods>
 
 	<CellMethods>
@@ -31,6 +45,13 @@
 			<Arg>	INT16	</Arg>
 			<Exposed/>
 		</reduceHp>
+		<method_Null>
+			<Exposed/>
+		</method_Null>
+		<methodSbyte>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</methodSbyte>
 	</CellMethods>
 
 </root>

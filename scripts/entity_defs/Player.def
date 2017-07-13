@@ -86,6 +86,11 @@
 		<compulsiveLeaveRoom>
 			<Exposed/>
 		</compulsiveLeaveRoom>
+		<createObstracle>
+			<Arg>	VECTOR3	</Arg>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</createObstracle>
 	</BaseMethods>
 	<CellMethods>
 		<updateZ>

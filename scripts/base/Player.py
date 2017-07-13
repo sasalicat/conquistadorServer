@@ -52,4 +52,6 @@ class Player(KBEngine.Proxy):
 		self.giveClientTo(KBEngine.entities[self.selfsAccountId])
 		self.destroyCellEntity()
 		DEBUG_MSG("compulsive Leave!!!")
-		
+	
+	def createObstracle(self,position,kind):
+		KBEngine.createBaseAnywhere("Obstacle",{"position":position,"SpaceId":self.InWhichRoomEntityId,"kind":kind,"createrNo":self.roomNo})
