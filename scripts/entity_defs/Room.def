@@ -29,6 +29,12 @@
 			<Flags>	BASE	</Flags>
 			<Persistent>	false	</Persistent>
 		</mequipmentList>
+		<ContextKind>
+			<Type>	INT8		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	1	</Default>
+			<Persistent>	false	</Persistent>
+		</ContextKind>
 	</Properties>
 
 	<ClientMethods>

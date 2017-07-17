@@ -2,24 +2,29 @@ import KBEngine
 import locationData
 from PlayerInRoom import PlayerInRoom
 from KBEDebug import *
+import ConTestFormat
 
 class Room(KBEngine.Base):
+	def setFormat(self):
+		if self.ContextKind==1:
+			self.Format=ConTestFormat.Team_Format_Occupy()
 	def __init__(self):
 		self.hall=KBEngine.globalData["Hall"]
 		self.Playerlist=[]
 		self.roomNoPoor=[]
 		self.finishNum=0;#用于记录加载完成的玩家
 		self.ChangedNum=0;#用于记录切换页面完成的玩家
+		self.Format=None
+		self.setFormat()
 		if self.masterId == -1:
 			DEBUG_MSG("MasterId is -1!!!")
 		else:
 			DEBUG_MSG("masterId is %d its vailed Kind is %d" %(self.masterId,self.masterKind))
 			self.EnterRoom(self.masterId,self.masterKind,self.mequipmentList)
-		
+
 		#self.roomName
 		#self.roomId
-		DEBUG_MSG("playerNum in room:%d"%len(self.Playerlist))
-		DEBUG_MSG("roomName:%s roomid:%d" %(self.roomName,self.roomId))
+
 		self.updateOut()
 	def updateOut(self):
 		self.hall.updateRoom(self.roomId,self.roomName,len(self.Playerlist))
@@ -46,6 +51,8 @@ class Room(KBEngine.Base):
 		playerInRoomList={"list":list,"selfRoomId":newRoomNo};
 		KBEngine.entities[newPlayerId].client.InitRoomInfo(playerInRoomList)
 		self.updateOut()
+
+
 	def LeaveRoom(self,PlayId):#被Account.py呼叫
 		for item in self.Playerlist:
 			if item.playerId==PlayId:
@@ -86,6 +93,8 @@ class Room(KBEngine.Base):
 	def onLoseCell( self ):
 		self.destroy()
 		self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
+	def onGetCell( self ):
+		self.Format.onMapBuild(self)#创建决胜物件
 	def setReady(self,roomNo,TorF):
 		DEBUG_MSG("for roomNo is%d" %roomNo)
 		data={}

@@ -9,4 +9,5 @@ class  PlayerInRoom:
 		self.roomNo=roomNo
 		self.equipmentList=equipmentList
 		self.playerGamingId=-1#這是player Entity的id,用於記錄開始遊戲後giveclient之後的玩家entity,只有在那個時候才會被賦值
+		self.team=-1;
 		DEBUG_MSG("InRoom init!!!")

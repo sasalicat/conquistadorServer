@@ -12,4 +12,5 @@
 	<Room hasClient="false" hasCell="true"></Room>
 	<Player hasClient="true" hasCell="true" hasBase="true"></Player>
 	<Obstacle hasClient="true" hasCell="true" hasBase="true"></Obstacle>
+	<Area hasClient="true" hasCell="true" hasBase="true"></Area>
 </root>

@@ -1,0 +1,43 @@
+<root>
+	<Properties>
+		<SpaceId>
+			<Type>	INT32		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</SpaceId>
+		<insideNo>
+			<Type> ARRAY <of> INT8 </of> </Type>
+			<Flags>	Base	</Flags>
+			<Persistent>	false	</Persistent>
+		</insideNo>
+		<radius>
+			<Type>	INT16		</Type>
+			<Flags>	ALL_CLIENTS	</Flags>
+			<Default>	0	</Default>
+			<Persistent>	true	</Persistent>
+		</radius>
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<BaseMethods>
+
+	</BaseMethods>
+
+	<CellMethods>
+		<EnterArea>
+			<Arg>	INT8	</Arg>
+		<Exposed/>
+		</EnterArea>
+		<LeaveArea>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</LeaveArea>
+		<GetList>
+			<Exposed/>
+		</GetList>
+	</CellMethods>
+
+</root>

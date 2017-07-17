@@ -15,6 +15,9 @@
 	
 	<RoomInfoList>FIXED_DICT
 		<Properties>
+			<!--<format>
+				<Type> INT8  </Type>
+			</format>-->
 			<list>
 				<Type> ARRAY <of> RoomInfo </of> </Type>
 			</list>
