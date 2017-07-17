@@ -31,10 +31,10 @@
 			<Arg>	INT8	</Arg>
 		<Exposed/>
 		</EnterArea>
-		<LeaveArea>
+		<ExitArea>
 			<Arg>	INT8	</Arg>
 			<Exposed/>
-		</LeaveArea>
+		</ExitArea>
 		<GetList>
 			<Exposed/>
 		</GetList>
