@@ -8,7 +8,7 @@ class Area(KBEngine.Entity):
 	def EnterArea(self,expose,No):
 		self.insideNo.append(No)
 		DEBUG_MSG("%d enter Area"%No)
-	def LeaveArea(self,expose,No):
+	def ExitArea(self,expose,No):
 		self.insideNo.remove(No)
 		DEBUG_MSG("%d leave Area"%No)
 	def GetList(self,expose):
