@@ -54,6 +54,11 @@
 			<Arg>	INT8	</Arg>
 			<Arg>	INT8	</Arg>
 		</receive4>
+		<receive5>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT16	</Arg>
+			<Arg>	INT8	</Arg>
+		</receive5>
 		<getFinish>
 			<Arg>	INT8	</Arg>
 		</getFinish>
@@ -126,7 +131,12 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</notify4>
-
+		<notify5>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT16	</Arg>
+			<Exposed/>
+		</notify5>
+		
 		<setRoomId>
 			<Arg>	INT32	</Arg>
 		</setRoomId>

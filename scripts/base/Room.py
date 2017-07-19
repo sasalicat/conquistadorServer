@@ -95,6 +95,8 @@ class Room(KBEngine.Base):
 		self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
 	def onGetCell( self ):
 		self.Format.onMapBuild(self)#创建决胜物件
+		DEBUG_MSG("======================onMapBuild==========================")
+		DEBUG_MSG(self.Format.centerArea)
 	def setReady(self,roomNo,TorF):
 		DEBUG_MSG("for roomNo is%d" %roomNo)
 		data={}
@@ -142,11 +144,15 @@ class Room(KBEngine.Base):
 			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)
 		if self.finishNum >=len(self.Playerlist):
 			self.addTimer(0.1,0.1,1)
+			#self.addTimer(1,1,2)
 	
 	def onTimer( self, timerHandle, userData ):
-		if userData==1:
+		if userData==1:#间隔触发
 			#DEBUG_MSG("ontimer userData=1")
 			for item in self.Playerlist:
 				KBEngine.entities[item.playerGamingId].client.intervalTrigger()
+		if userData==2:#周期性赛制检查
+			DEBUG_MSG("onUpdate")
+			self.Format.onUpdate(self)
 
 				
