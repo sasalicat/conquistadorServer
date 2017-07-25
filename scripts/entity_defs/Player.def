@@ -1,10 +1,10 @@
 <root>
 	<Properties>
 			<InWhichRoomEntityId>
-			<Type>	INT32		</Type>
-			<Flags>	BASE	</Flags>
-			<Default>	-1	</Default>
-			<Persistent>	false	</Persistent>
+				<Type>	INT32		</Type>
+				<Flags>	BASE	</Flags>
+				<Default>	-1	</Default>
+				<Persistent>	false	</Persistent>
 			</InWhichRoomEntityId>
 			<selfsAccountId>
 			<Type>	INT32		</Type>
@@ -13,10 +13,10 @@
 			<Persistent>	false	</Persistent>
 			</selfsAccountId>
 			<roomNo>
-			<Type>	INT8		</Type>
-			<Flags>	BASE	</Flags>
-			<Default>	-1	</Default>
-			<Persistent>	false	</Persistent>
+				<Type>	INT8		</Type>
+				<Flags>	BASE	</Flags>
+				<Default>	-1	</Default>
+				<Persistent>	false	</Persistent>
 			</roomNo>
 	</Properties>
 
@@ -66,6 +66,9 @@
 		</intervalTrigger>
 		<reqmsTask>
 		</reqmsTask>
+		<gameOver>
+			<Arg>	INT8	</Arg>
+		</gameOver>
 	</ClientMethods>
 
 	<BaseMethods>
@@ -96,6 +99,13 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</createObstracle>
+		<notifyDied>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</notifyDied>
+		<changeToAccount>
+			<Exposed/>
+		</changeToAccount>
 	</BaseMethods>
 	<CellMethods>
 		<updateZ>
@@ -140,6 +150,7 @@
 		<setRoomId>
 			<Arg>	INT32	</Arg>
 		</setRoomId>
+
 	</CellMethods>
 
 </root>

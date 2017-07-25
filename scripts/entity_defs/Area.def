@@ -8,7 +8,7 @@
 		</SpaceId>
 		<insideNo>
 			<Type> ARRAY <of> INT8 </of> </Type>
-			<Flags>	Base	</Flags>
+			<Flags>	CELL_PRIVATE	</Flags>
 			<Persistent>	false	</Persistent>
 		</insideNo>
 		<radius>

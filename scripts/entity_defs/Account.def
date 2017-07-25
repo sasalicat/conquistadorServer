@@ -6,6 +6,18 @@
 			<Default>	None	</Default>
 			<Persistent>	true	</Persistent>
 		</nickName>
+		<InRoom>
+			<Type>	INT8		</Type>
+			<Flags>	BASE_AND_CLIENT	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</InRoom>
+		<RoomNo>
+			<Type>	INT8		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</RoomNo>
 	</Properties>
 
 	<ClientMethods>
@@ -62,6 +74,9 @@
 		<leaveRoom>
 			<Exposed/>
 		</leaveRoom>
+		<ReSendRoomInfo>
+			<Exposed/>
+		</ReSendRoomInfo>
 	</BaseMethods>
 
 	<CellMethods>

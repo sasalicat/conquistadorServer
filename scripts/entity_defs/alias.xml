@@ -35,9 +35,13 @@
 			<ready>
 				<Type>INT8</Type>
 			</ready>
+			<team>
+				<Type> INT8</Type>
+			</team>
 			<equipmentList>
 				<Type>	ARRAY <of> INT8 </of>	</Type>
 			</equipmentList>
+			
 		</Properties>
 	</InRoomUpdate>
 	
@@ -55,6 +59,9 @@
 			<name>
 				<Type>UNICODE</Type>
 			</name>
+			<team>
+				<Type> INT8</Type>
+			</team>
 			<equipmentList>
 				<Type>	ARRAY <of> INT8 </of>	</Type>
 			</equipmentList>

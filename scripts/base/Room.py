@@ -13,7 +13,7 @@ class Room(KBEngine.Base):
 		self.Playerlist=[]
 		self.roomNoPoor=[]
 		self.finishNum=0;#用于记录加载完成的玩家
-		self.ChangedNum=0;#用于记录切换页面完成的玩家
+		#self.ChangedNum=0;#用于记录切换页面完成的玩家
 		self.Format=None
 		self.setFormat()
 		if self.masterId == -1:
@@ -28,28 +28,35 @@ class Room(KBEngine.Base):
 		self.updateOut()
 	def updateOut(self):
 		self.hall.updateRoom(self.roomId,self.roomName,len(self.Playerlist))
+		
+	def sendAllPlayerInfo(self,playerId,newRoomNo):
+		list=[]
+		for item in self.Playerlist:
+			list.append({"roleRoomId":item.roomNo,"roleKind":item.roleKind,"ready":item.ready,"name":KBEngine.entities[item.playerId].nickName,"team":item.team,"equipmentList":item.equipmentList})
+		playerInRoomList={"list":list,"selfRoomId":newRoomNo}
+		KBEngine.entities[playerId].client.InitRoomInfo(playerInRoomList)
+		
+		
 	def EnterRoom(self,newPlayerId,rolekind,equipmentList):
 		DEBUG_MSG("enter room id is %d" %newPlayerId)
 		#和hall一樣,檢查編號池裏面有沒有編號,如果有,優先使用閒置編號否則賦值玩家列表長度,即編號最大玩家的下一個編號
 		newRoomNo=len(self.Playerlist)
 		if(len(self.roomNoPoor)>0):
 			newRoomNo=self.roomNoPoor.pop(0)
+		teamNo=self.Format.onGiveTeam(self,newRoomNo)
 		#这里先做给现有玩家添加新的玩家信息
 		for item in self.Playerlist:
-			KBEngine.entities[item.playerId].client.AddARoomInfo({"roleRoomId":newRoomNo,"roleKind":rolekind,"ready":False,"name":KBEngine.entities[newPlayerId].nickName,"equipmentList":equipmentList})
+			KBEngine.entities[item.playerId].client.AddARoomInfo({"roleRoomId":newRoomNo,"roleKind":rolekind,"ready":False,"name":KBEngine.entities[newPlayerId].nickName,"team":teamNo,"equipmentList":equipmentList})
 		#完成后在将新玩家加入列表这样能省一个判断句
-		self.Playerlist.append(PlayerInRoom(newPlayerId,False,rolekind,newRoomNo,equipmentList))
+		self.Playerlist.append(PlayerInRoom(newPlayerId,False,rolekind,newRoomNo,teamNo,equipmentList))
 		#如果人數達到2才創建地圖,以防有人一直開房.反正遊戲至少要兩人才能進行
 		if len(self.Playerlist)==2 and self.cell==None:
 			self.createInNewSpace(None)
 		#將玩家從在hall等待的玩家id中移除
 		self.hall.playerInHallIds.remove(newPlayerId)
+		self.sendAllPlayerInfo(newPlayerId,newRoomNo)
+		KBEngine.entities[newPlayerId].RoomNo=newRoomNo#设置新entity的roomNo
 		
-		list=[]
-		for item in self.Playerlist:
-			list.append({"roleRoomId":item.roomNo,"roleKind":item.roleKind,"ready":item.ready,"name":KBEngine.entities[item.playerId].nickName,"equipmentList":item.equipmentList})
-		playerInRoomList={"list":list,"selfRoomId":newRoomNo};
-		KBEngine.entities[newPlayerId].client.InitRoomInfo(playerInRoomList)
 		self.updateOut()
 
 
@@ -104,7 +111,7 @@ class Room(KBEngine.Base):
 			if item.roomNo==roomNo:
 				DEBUG_MSG("item roomNo is%d" %item.roomNo)
 				item.ready=TorF
-				data={"roleRoomId":item.roomNo,"roleKind":item.roleKind,"ready":TorF,"equipmentList":item.equipmentList}
+				data={"roleRoomId":item.roomNo,"roleKind":item.roleKind,"ready":TorF,"team":item.team,"equipmentList":item.equipmentList}
 				break
 		#更新所有其他玩家
 		#檢查所有玩家是否都準備完成
@@ -127,7 +134,7 @@ class Room(KBEngine.Base):
 				DEBUG_MSG("item.playerGamingId is %d" %item.playerGamingId)
 				
 	def noticeLeave(self,roomId):#告知客戶端有玩家離開房間
-		data={"roleRoomId":roomId,"roleKind":-1,"ready":False,"equipmentList":[]}#roleKind為-1代表玩家離開,可以省一個function
+		data={"roleRoomId":roomId,"roleKind":-1,"ready":False,"team":-1,"equipmentList":[]}#roleKind為-1代表玩家離開,可以省一個function
 
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerId].client.UpdateRoomInfo(data)
@@ -143,16 +150,41 @@ class Room(KBEngine.Base):
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)
 		if self.finishNum >=len(self.Playerlist):
-			self.addTimer(0.1,0.1,1)
-			#self.addTimer(1,1,2)
+			self.intervalTimer=self.addTimer(0.1,0.1,1)
+			self.updateTimer=self.addTimer(1,1,2)
+			DEBUG_MSG("ADDTimer%d" %(self.updateTimer))
 	
 	def onTimer( self, timerHandle, userData ):
 		if userData==1:#间隔触发
 			#DEBUG_MSG("ontimer userData=1")
 			for item in self.Playerlist:
-				KBEngine.entities[item.playerGamingId].client.intervalTrigger()
+				if item.playerGamingId!=-1:
+					KBEngine.entities[item.playerGamingId].client.intervalTrigger()
 		if userData==2:#周期性赛制检查
-			DEBUG_MSG("onUpdate")
+			DEBUG_MSG("onUpdate" + str(timerHandle))
 			self.Format.onUpdate(self)
-
-				
+	def setDied(self,roomNo,code):
+		if code<=0:#死亡
+			self.Playerlist[roomNo].alive=0
+		else:#复活角色,将会发送复活请求以code的血量复活
+			pass
+	def resetRoom(self):
+		for item in self.Playerlist:
+			item.playerGamingId=-1
+			item.alive=1
+			item.ready=False
+	def gameOver(self,winnerMo):
+		#呼叫所有玩家的切回房间页面函数
+		DEBUG_MSG("updateTimer is")
+		DEBUG_MSG(self.updateTimer)
+		self.delTimer(self.intervalTimer)
+		self.delTimer(self.updateTimer)
+		self.finishNum=0#重置加载完成玩家的数量
+		for item in self.Playerlist:
+			KBEngine.entities[item.playerGamingId].client.gameOver(winnerMo)
+			KBEngine.entities[item.playerGamingId].changeToAccount()
+		self.resetRoom()
+		self.cell.cleanAllEntity()
+		self.Format.onMapBuild(self)#重新创建决胜物件
+		
+		

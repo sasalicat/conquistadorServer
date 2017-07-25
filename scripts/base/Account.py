@@ -6,7 +6,7 @@ class Account(KBEngine.Proxy):
 	def __init__(self):
 		KBEngine.Proxy.__init__(self)
 		self.InWhichRoomEntityId=-1
-		
+		DEBUG_MSG("Account _init_");
 		
 	def onTimer(self, id, userArg):
 		"""
@@ -28,10 +28,12 @@ class Account(KBEngine.Proxy):
 		#	KBEngine.baseAppData['first']=self
 		#else:
 		#	self.createCellEntity(KBEngine.baseAppData['first'].cell)
-		KBEngine.globalData["Hall"].addPlayer(self)
-		DEBUG_MSG("account init!!!")#在大廳添加玩家!!!!
-		INFO_MSG("account[%i] entities enable. mailbox:%s" % (self.id, self.client))
-			
+		if self.InWhichRoomEntityId == -1:#第一次初始化
+			KBEngine.globalData["Hall"].addPlayer(self)
+			DEBUG_MSG("account init!!!")#在大廳添加玩家!!!!
+			INFO_MSG("account[%i] entities enable. mailbox:%s" % (self.id, self.client))
+		else:
+			DEBUG_MSG("Account((((((((((((reEnabled))))))))))))))")
 	def onLogOnAttempt(self, ip, port, password):
 		"""
 		KBEngine method.
@@ -73,7 +75,8 @@ class Account(KBEngine.Proxy):
 	def createRoom(self,roomName,roleKind,equipList):
 		self.InWhichRoomEntityId=KBEngine.globalData["Hall"].createRoom(roomName,self.id,roleKind,equipList)
 		DEBUG_MSG("RoomName Receive:%s !!!!!" %roomName)
-	def enterRoomReq(self,roomNo,roleKind,equipList): 
+	def enterRoomReq(self,roomNo,roleKind,equipList):
+		self.InEoom=0
 		roomlist=KBEngine.globalData["Hall"].rooms
 		for roomInfo in roomlist:
 			if roomInfo.roomNo==roomNo:
@@ -101,3 +104,9 @@ class Account(KBEngine.Proxy):
 		player= KBEngine.createBaseLocally("Player",{"InWhichRoomEntityId":self.InWhichRoomEntityId,"position":location,"selfsAccountId":self.id,"roomNo":selfRoomNo})
 		self.giveClientTo(player)
 		return player.id
+	def ReSendRoomInfo(self):
+			list=KBEngine.entities[self.InWhichRoomEntityId].Playerlist
+			for item in list:
+				if item.playerId==self.id:
+					KBEngine.entities[self.InWhichRoomEntityId].sendAllPlayerInfo(self.id,item.roomNo)
+					break

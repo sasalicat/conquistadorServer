@@ -52,6 +52,9 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</methodSbyte>
+		<DestoryEntity>
+			<Exposed/>
+		</DestoryEntity>
 	</CellMethods>
 
 </root>

@@ -5,9 +5,11 @@ from KBEDebug import *
 class Player(KBEngine.Proxy):
 	def __init__(self):
 		DEBUG_MSG("player init!!!")
+		self.noClient=False
 		
 	def onClientDeath(self):
 		KBEngine.entities[self.InWhichRoomEntityId].PlayerLeaveRoom(self.id)
+		self.noClient=True
 		if self.cell!=None:#如果已经有cell实体则删除cell实体
 			DEBUG_MSG("cell!=None-----------------------------")
 			self.destroyCellEntity()
@@ -15,8 +17,10 @@ class Player(KBEngine.Proxy):
 			self.destroy()#销毁自己
 		KBEngine.entities[self.selfsAccountId].onClientDeath()
 		
+		
 	def onLoseCell( self ):
-		self.destroy()
+		if self.noClient:
+			self.destroy()
 	
 	def onChangeToWar(self):
 		DEBUG_MSG("----------------------onChangeToWar OK")
@@ -55,3 +59,8 @@ class Player(KBEngine.Proxy):
 	
 	def createObstracle(self,position,kind):
 		KBEngine.createBaseAnywhere("Obstacle",{"position":position,"SpaceId":self.InWhichRoomEntityId,"kind":kind,"createrNo":self.roomNo})
+	
+	def notifyDied(self,code):
+		KBEngine.entities[self.InWhichRoomEntityId].setDied(self.roomNo,code)
+	def changeToAccount(self):
+		self.giveClientTo(KBEngine.entities[self.selfsAccountId])
