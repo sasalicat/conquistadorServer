@@ -16,6 +16,10 @@ class Player(KBEngine.Entity):
 	def notify3(self,expose,equipmentIndex,playerPos,mousePos):#用于主动技能
 		randomNum=random.randint(0,99)
 		self.allClients.receive3(equipmentIndex,playerPos,mousePos,randomNum)
+	def notify3_ap(self,expose,equipmentIndex,playerPos,TragetNo,TragetPosition):#用于主动技能
+		DEBUG_MSG("notify3_ap!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		randomNum=random.randint(0,99)
+		self.allClients.receive3_ap(equipmentIndex,playerPos,TragetNo,TragetPosition,randomNum)
 	def notify4(self,expose,playerPos,eulerAngles,damagerPos,damagerNo,kind,num,stiff,makeConversaly,hitConversaly):#用于传伤害
 		randomNum=random.randint(0,99)
 		self.allClients.receive4(playerPos,eulerAngles,damagerPos,damagerNo,kind,num,stiff,makeConversaly,hitConversaly,randomNum)
@@ -25,3 +29,5 @@ class Player(KBEngine.Entity):
 	def setRoomId(self,roomId):
 		DEBUG_MSG("set roomId %d" %roomId)
 		self.InWhichRoomEntityId=roomId
+	def addBuff(self,expose,no):
+		self.allClients.receiveAddBuff(no)
