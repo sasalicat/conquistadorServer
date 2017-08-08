@@ -79,6 +79,9 @@
 		<receiveAddBuff>
 			<Arg>	INT8	</Arg>
 		</receiveAddBuff>
+		<receiveContortion>
+			<Arg>	INT8	</Arg>
+		</receiveContortion>
 	</ClientMethods>
 
 	<BaseMethods>
@@ -171,6 +174,10 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</addBuff>
+		<distortion>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</distortion>
 	</CellMethods>
 
 </root>

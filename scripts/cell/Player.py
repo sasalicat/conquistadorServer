@@ -31,3 +31,5 @@ class Player(KBEngine.Entity):
 		self.InWhichRoomEntityId=roomId
 	def addBuff(self,expose,no):
 		self.allClients.receiveAddBuff(no)
+	def distortion(self,expose,no):
+		self.allClients.receiveContortion(no)
