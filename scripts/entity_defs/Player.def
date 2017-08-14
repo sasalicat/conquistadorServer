@@ -82,6 +82,10 @@
 		<receiveContortion>
 			<Arg>	INT8	</Arg>
 		</receiveContortion>
+		<receiveSynchro>
+			<Arg>	VECTOR3	</Arg>
+			<Arg>	INT8	</Arg>
+		</receiveSynchro>
 	</ClientMethods>
 
 	<BaseMethods>
@@ -178,6 +182,11 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</distortion>
+		<synchroPos>
+			<Arg>	VECTOR3	</Arg>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</synchroPos>
 	</CellMethods>
 
 </root>

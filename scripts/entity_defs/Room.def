@@ -32,15 +32,24 @@
 		<ContextKind>
 			<Type>	INT8		</Type>
 			<Flags>	BASE	</Flags>
-			<Default>	1	</Default>
+			<Default>	2	</Default>
 			<Persistent>	false	</Persistent>
 		</ContextKind>
+		<Playerdatas>
+		<Type>	INT8		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	1	</Default>
+			<Persistent>	false	</Persistent>
+		</Playerdatas>
 	</Properties>
 
 	<ClientMethods>
 	</ClientMethods>
 
 	<BaseMethods>
+		<FormatCreated>
+			<Arg>	INT32	</Arg>
+		</FormatCreated>
 	</BaseMethods>
 
 	<CellMethods>

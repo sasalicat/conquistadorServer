@@ -8,6 +8,8 @@ class Room(KBEngine.Base):
 	def setFormat(self):
 		if self.ContextKind==1:
 			self.Format=ConTestFormat.Team_Format_Occupy()
+		elif self.ContextKind==2:
+			self.Format=ConTestFormat.Team_Format_annihilate()
 	def __init__(self):
 		self.hall=KBEngine.globalData["Hall"]
 		self.Playerlist=[]
@@ -103,7 +105,7 @@ class Room(KBEngine.Base):
 	def onGetCell( self ):
 		self.Format.onMapBuild(self)#创建决胜物件
 		DEBUG_MSG("======================onMapBuild==========================")
-		DEBUG_MSG(self.Format.centerArea)
+	
 	def setReady(self,roomNo,TorF):
 		DEBUG_MSG("for roomNo is%d" %roomNo)
 		data={}
@@ -121,7 +123,7 @@ class Room(KBEngine.Base):
 			if not item.ready:
 				allReady=False
 		#開始遊戲
-		if allReady and len(self.Playerlist)>1:
+		if allReady and self.Format.onAllReady(self):
 			#创造障碍物
 			for i in range(len(locationData.obstacleKind)):
 				KBEngine.createBaseAnywhere("Obstacle",{"position":locationData.obstacleLocation[i],"SpaceId":self.id,"kind":locationData.obstacleKind[i]})
@@ -161,7 +163,6 @@ class Room(KBEngine.Base):
 				if item.playerGamingId!=-1:
 					KBEngine.entities[item.playerGamingId].client.intervalTrigger()
 		if userData==2:#周期性赛制检查
-			DEBUG_MSG("onUpdate" + str(timerHandle))
 			self.Format.onUpdate(self)
 	def setDied(self,roomNo,code):
 		if code<=0:#死亡
@@ -186,5 +187,7 @@ class Room(KBEngine.Base):
 		self.resetRoom()
 		self.cell.cleanAllEntity()
 		self.Format.onMapBuild(self)#重新创建决胜物件
-		
-		
+	def ChangeTeam(self,roomNo):
+		self.Format.onChangeTeam(self,roomNo)
+	def	FormatCreated(self,eid):
+		self.Format.createFinish(eid)

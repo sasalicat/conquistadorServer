@@ -33,3 +33,5 @@ class Player(KBEngine.Entity):
 		self.allClients.receiveAddBuff(no)
 	def distortion(self,expose,no):
 		self.allClients.receiveContortion(no)
+	def synchroPos(self,expose,pos,buttoms):
+		self.allClients.receiveSynchro(pos,buttoms)

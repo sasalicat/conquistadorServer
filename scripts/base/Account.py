@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 import KBEngine
 from KBEDebug import *
+import RoleCreater
 
 class Account(KBEngine.Proxy):
 	def __init__(self):
 		KBEngine.Proxy.__init__(self)
 		self.InWhichRoomEntityId=-1
-		DEBUG_MSG("Account _init_");
+		DEBUG_MSG("roleList:{0} length:{1}".format(self.RoleList,len(self.RoleList)))
+		DEBUG_MSG("one:{0} two{1} what?{2}".format(self.RoleList==None,len(self.RoleList)==0,len(self.RoleList)))
+		if(self.RoleList==None or len(self.RoleList)==0):#刚创建帐号,没有角色
+			firstRole=RoleCreater.createRoleRandom()
+			self.RoleList=[firstRole]
+			self.writeToDB()
+			DEBUG_MSG("Account _init_ first is{0}".format(self.RoleList[0]))
 		
 	def onTimer(self, id, userArg):
 		"""
@@ -90,6 +97,8 @@ class Account(KBEngine.Proxy):
 			KBEngine.entities[self.InWhichRoomEntityId].setReady(roomNo,TorF)
 		else:
 			DEBUG_MSG("on setReady inwhich is -1")
+	def reqChangeTeam(self):
+		KBEngine.entities[self.InWhichRoomEntityId].ChangeTeam(self.RoomNo)
 	def leaveRoom(self):
 		if self.InWhichRoomEntityId!=-1:
 			KBEngine.entities[self.InWhichRoomEntityId].LeaveRoom(self.id)
@@ -110,3 +119,9 @@ class Account(KBEngine.Proxy):
 				if item.playerId==self.id:
 					KBEngine.entities[self.InWhichRoomEntityId].sendAllPlayerInfo(self.id,item.roomNo)
 					break
+	def reRandomRole(self):
+		self.RoleList[0]=RoleCreater.createRoleRandom()
+		DEBUG_MSG("changeRoleList {0}".format(self.RoleList))
+	def identifyRole(self):
+		newRole=RoleCreater.createRoleRandom();
+		self.RoleList=[newRole]+self.RoleList;

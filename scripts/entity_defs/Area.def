@@ -6,6 +6,12 @@
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
 		</SpaceId>
+		<RoomId>
+			<Type>	INT32		</Type>
+			<Flags>	CELL_PRIVATE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</RoomId>
 		<insideNo>
 			<Type> ARRAY <of> INT8 </of> </Type>
 			<Flags>	CELL_PRIVATE	</Flags>

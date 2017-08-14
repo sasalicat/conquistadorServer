@@ -90,5 +90,17 @@
 		</Properties>
 	</PlayerData>
 	<PlayerDataList>	ARRAY <of> PlayerData </of>	</PlayerDataList>
+	
+	<RoleData>FIXED_DICT
+		<Properties>
+			<kind>
+				<Type>INT8</Type>
+			</kind>
+			<equipmentNos>
+				<Type> ARRAY <of> INT8 </of> </Type>
+			</equipmentNos>
+		</Properties>
+	</RoleData>
 
-	</root>
+
+</root>

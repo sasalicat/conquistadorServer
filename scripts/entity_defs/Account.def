@@ -18,6 +18,13 @@
 			<Default>	-1	</Default>
 			<Persistent>	false	</Persistent>
 		</RoomNo>
+		<RoleList>
+			<Type>	ARRAY <of> RoleData </of>		</Type>
+			<Flags>	BASE_AND_CLIENT	</Flags>
+			<Default>	None	</Default>
+			<Persistent>	true	</Persistent>
+		</RoleList>
+		
 	</Properties>
 
 	<ClientMethods>
@@ -77,6 +84,12 @@
 		<ReSendRoomInfo>
 			<Exposed/>
 		</ReSendRoomInfo>
+		<reqChangeTeam>
+			<Exposed/>
+		</reqChangeTeam>
+		<reRandomRole>
+			<Exposed/>
+		</reRandomRole>
 	</BaseMethods>
 
 	<CellMethods>
