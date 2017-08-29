@@ -8,7 +8,8 @@ Role=[[0],[2,3],[6,7],[8,9],[15],[18],[19]]
 
 def	createRoleRandom():
 	roleNo=random.choice(roleRange)
-	roleSkill=Role[roleNo]
+	roleSkill=(Role[roleNo])[:]
+	print("before rolelist is{0}".format(roleSkill))
 	active=activeEquipment[:]
 	for i in range(3):
 		ans=random.choice(active)
@@ -24,5 +25,6 @@ def	createRoleRandom():
 		if ans in UniquePass:
 			print("enter ans in")
 			passive.remove(ans)
+	print('final ans is{0}'.format(roleSkill))
 	return {"kind":roleNo,"equipmentNos":roleSkill}
 #createRoleRandom()

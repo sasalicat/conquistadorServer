@@ -121,6 +121,7 @@ class Account(KBEngine.Proxy):
 					break
 	def reRandomRole(self):
 		self.RoleList[0]=RoleCreater.createRoleRandom()
+		self.RoleList=self.RoleList
 		DEBUG_MSG("changeRoleList {0}".format(self.RoleList))
 	def identifyRole(self):
 		newRole=RoleCreater.createRoleRandom();
