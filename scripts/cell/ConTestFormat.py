@@ -9,14 +9,17 @@ class Team_Format_Occupy:
 	def createFinish(self,eid):
 		DEBUG_MSG("createFinish")
 		self.centerArea=KBEngine.entities[eid]
+		self.centerArea.cell.addobserver(self)
 	def onMapBuild(self,room):#初始化地图时呼叫
-		DEBUG_MSG("===================onMapBuild===========================")
-		KBEngine.createBaseAnywhere("Area",{"position":(0,0,0),"SpaceId":room.id,"radius":3000,"SpaceId":room.id,"RoomId":room.id},)
-	#cell部分------------------------------------------------------------
+		DEBUG_MSG("===================onMapBuild---------------------------")
+		newone=KBEngine.createEntity("Area",room.spaceID,(0.0,0.0,0.0),(0.0,0.0,0.0),{"position":(0,0,0),"SpaceId":room.id,"radius":3000,"SpaceId":room.id,"RoomId":room.id})
+		DEBUG_MSG("GetList onmapbuild{0}".format(newone.GetList(True)))
+		self.centerArea=newone
 	def onEnitityCreated(self,entity):
 		if entity.className=="Area":
 			self.centerArea=entity
 	def onUpdate(self,room):#游戏进行中每一段时间呼叫一次,用于判断胜利
+		#DEBUG_MSG("onupdate cell")
 		playernum=len(room.teamList)/2;#每一队玩家的人数
 		team1_in=0;
 		team2_in=0;
@@ -24,7 +27,8 @@ class Team_Format_Occupy:
 		team2_d=0;
 		#检查区域并加分
 		if self.centerArea!=None:
-			DEBUG_MSG("check")
+			self.inArea=self.centerArea.GetList(True)
+			DEBUG_MSG("check centerArea not NULL len is{0}".format(len(self.inArea)))
 			if self.inArea!=None:
 				for item in self.inArea:
 					if room.teamList[item]==1:
@@ -35,7 +39,7 @@ class Team_Format_Occupy:
 					self.point_team1+=1
 				elif team1_in!=0 and team2_in==0:
 					self.point_team2+=1
-				DEBUG_MSG("team1 point:%d team2 point %d" %{self.point_team1,self.point_team2})
+				DEBUG_MSG("team1 point:{0} team2 point {1}".format(self.point_team1,self.point_team2))
 		if self.point_team1>=60:
 			room.base.gameOver(1)
 			return
@@ -46,9 +50,9 @@ class Team_Format_Occupy:
 		
 		for i in range(0,len(room.alivelist)):
 			if not room.alivelist[i]:
-				if room.teamList==1:
+				if room.teamList[i]==1:
 					team1_d+=1
-				elif item.teamList==2:
+				elif room.teamList[i]==2:
 					team2_d+=1
 		if team1_d>=playernum and team2_d<playernum:
 			room.base.gameOver(1)
@@ -56,7 +60,7 @@ class Team_Format_Occupy:
 			room.base.gameOver(2)
 		elif team1_d>=playernum and team2_d>=playernum:
 			room.base.gameOver(0)
-#----------------------------------------------------------------------
+
 	def onAllReady(self,room):#当玩家都准备的时候判断要不要开始游戏
 		team1num=0
 		team2num=0

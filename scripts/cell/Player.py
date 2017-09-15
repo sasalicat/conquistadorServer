@@ -26,6 +26,8 @@ class Player(KBEngine.Entity):
 	def notify5(self,expose,treaterNo,treatNum):
 		randomNum=random.randint(0,99)
 		self.allClients.receive5(treaterNo,treatNum,randomNum)
+	def notifyDied(self,expose,code):
+		KBEngine.entities[self.InWhichRoomEntityId].setDied(self.roomNo,code)
 	def setRoomId(self,roomId):
 		DEBUG_MSG("set roomId %d" %roomId)
 		self.InWhichRoomEntityId=roomId
@@ -35,3 +37,5 @@ class Player(KBEngine.Entity):
 		self.allClients.receiveContortion(no)
 	def synchroPos(self,expose,pos,buttoms):
 		self.allClients.receiveSynchro(pos,buttoms)
+	def setRoomNo(self,no):
+		self.roomNo=no

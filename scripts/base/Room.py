@@ -41,6 +41,7 @@ class Room(KBEngine.Base):
 		
 	def EnterRoom(self,newPlayerId,rolekind,equipmentList):
 		DEBUG_MSG("enter room id is %d" %newPlayerId)
+		#DEBUG_MSG("entity typr is{0}".format(isinstance(KBEngine.entities[newPlayerId],Account.Account)))
 		#和hall一樣,檢查編號池裏面有沒有編號,如果有,優先使用閒置編號否則賦值玩家列表長度,即編號最大玩家的下一個編號
 		newRoomNo=len(self.Playerlist)
 		if(len(self.roomNoPoor)>0):
@@ -102,10 +103,6 @@ class Room(KBEngine.Base):
 	def onLoseCell( self ):
 		self.destroy()
 		self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
-	def onGetCell( self ):
-		self.Format.onMapBuild(self)#创建决胜物件
-		DEBUG_MSG("======================onMapBuild==========================")
-	
 	def setReady(self,roomNo,TorF):
 		DEBUG_MSG("for roomNo is%d" %roomNo)
 		data={}
@@ -134,6 +131,11 @@ class Room(KBEngine.Base):
 				DEBUG_MSG(locationData.initLocation[item.roomNo])
 				item.playerGamingId= KBEngine.entities[item.playerId].changeToPlayer(locationData.initLocation[item.roomNo])
 				DEBUG_MSG("item.playerGamingId is %d" %item.playerGamingId)
+			#设置cell部分的生存表
+			teamlists=[]
+			for role in self.Playerlist:
+				teamlists.append(role.team)
+			self.cell.InitTeamList(teamlists)
 				
 	def noticeLeave(self,roomId):#告知客戶端有玩家離開房間
 		data={"roleRoomId":roomId,"roleKind":-1,"ready":False,"team":-1,"equipmentList":[]}#roleKind為-1代表玩家離開,可以省一個function
@@ -153,17 +155,13 @@ class Room(KBEngine.Base):
 			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)
 		if self.finishNum >=len(self.Playerlist):
 			self.intervalTimer=self.addTimer(0.1,0.1,1)
-			self.updateTimer=self.addTimer(1,1,2)
-			DEBUG_MSG("ADDTimer%d" %(self.updateTimer))
-	
+			DEBUG_MSG("addTimer interval...")
 	def onTimer( self, timerHandle, userData ):
 		if userData==1:#间隔触发
 			#DEBUG_MSG("ontimer userData=1")
 			for item in self.Playerlist:
 				if item.playerGamingId!=-1:
 					KBEngine.entities[item.playerGamingId].client.intervalTrigger()
-		if userData==2:#周期性赛制检查
-			self.Format.onUpdate(self)
 	def setDied(self,roomNo,code):
 		if code<=0:#死亡
 			self.Playerlist[roomNo].alive=0
@@ -176,17 +174,13 @@ class Room(KBEngine.Base):
 			item.ready=False
 	def gameOver(self,winnerMo):
 		#呼叫所有玩家的切回房间页面函数
-		DEBUG_MSG("updateTimer is")
-		DEBUG_MSG(self.updateTimer)
 		self.delTimer(self.intervalTimer)
-		self.delTimer(self.updateTimer)
 		self.finishNum=0#重置加载完成玩家的数量
 		for item in self.Playerlist:
 			KBEngine.entities[item.playerGamingId].client.gameOver(winnerMo)
 			KBEngine.entities[item.playerGamingId].changeToAccount()
 		self.resetRoom()
 		self.cell.cleanAllEntity()
-		self.Format.onMapBuild(self)#重新创建决胜物件
 	def ChangeTeam(self,roomNo):
 		self.Format.onChangeTeam(self,roomNo)
 	def	FormatCreated(self,eid):

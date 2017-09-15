@@ -6,8 +6,8 @@ class Area(KBEngine.Entity):
 	insideNo=[]
 	observers=[]
 	def __init__(self):
-		KBEngine.entities[self.RoomId].base.FormatCreated(self.id)
-		DEBUG_MSG("Area cell init!!!")
+		#KBEngine.entities[self.RoomId].base.FormatCreated(self.id)
+		DEBUG_MSG("Area cell init!!! in space{0}".format(self.spaceID))
 	def EnterArea(self,expose,No):
 		self.insideNo.append(No)
 		DEBUG_MSG("%d enter Area"%No)

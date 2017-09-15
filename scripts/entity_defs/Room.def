@@ -32,11 +32,17 @@
 		<ContextKind>
 			<Type>	INT8		</Type>
 			<Flags>	BASE	</Flags>
-			<Default>	2	</Default>
+			<Default>	1	</Default>
 			<Persistent>	false	</Persistent>
 		</ContextKind>
+		<ContextKindCell>
+			<Type>	INT8		</Type>
+			<Flags>	CELL_PRIVATE	</Flags>
+			<Default>	1	</Default>
+			<Persistent>	false	</Persistent>
+		</ContextKindCell>
 		<Playerdatas>
-		<Type>	INT8		</Type>
+			<Type>	INT8		</Type>
 			<Flags>	BASE	</Flags>
 			<Default>	1	</Default>
 			<Persistent>	false	</Persistent>
@@ -50,11 +56,19 @@
 		<FormatCreated>
 			<Arg>	INT32	</Arg>
 		</FormatCreated>
+		<gameOver>
+			<Arg>	INT8	</Arg>
+		</gameOver>
 	</BaseMethods>
 
 	<CellMethods>
 		<cleanAllEntity>
 		</cleanAllEntity>
+		<InitTeamList>
+			<Arg>
+				 ARRAY <of> INT8 </of>
+			</Arg>
+		</InitTeamList>
 	</CellMethods>
 
 </root>

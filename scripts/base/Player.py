@@ -45,7 +45,7 @@ class Player(KBEngine.Proxy):
 	def onGetCell( self ):
 		if self.InWhichRoomEntityId!=-1:
 			self.cell.setRoomId(self.InWhichRoomEntityId)
-	
+		self.cell.setRoomNo(self.roomNo)
 	def msTask(self):
 		self.client.reqmsTask();
 	
@@ -59,8 +59,5 @@ class Player(KBEngine.Proxy):
 	
 	def createObstracle(self,position,kind):
 		KBEngine.createBaseAnywhere("Obstacle",{"position":position,"SpaceId":self.InWhichRoomEntityId,"kind":kind,"createrNo":self.roomNo})
-	
-	def notifyDied(self,code):
-		KBEngine.entities[self.InWhichRoomEntityId].setDied(self.roomNo,code)
 	def changeToAccount(self):
 		self.giveClientTo(KBEngine.entities[self.selfsAccountId])

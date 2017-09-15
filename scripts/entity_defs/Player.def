@@ -116,10 +116,6 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</createObstracle>
-		<notifyDied>
-			<Arg>	INT8	</Arg>
-			<Exposed/>
-		</notifyDied>
 		<changeToAccount>
 			<Exposed/>
 		</changeToAccount>
@@ -170,7 +166,10 @@
 			<Arg>	INT16	</Arg>
 			<Exposed/>
 		</notify5>
-		
+		<notifyDied>
+			<Arg>	INT8	</Arg>
+			<Exposed/>
+		</notifyDied>
 		<setRoomId>
 			<Arg>	INT32	</Arg>
 		</setRoomId>
@@ -187,6 +186,9 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</synchroPos>
+		<setRoomNo>
+			<Arg>	INT8	</Arg>
+		</setRoomNo>
 	</CellMethods>
 
 </root>
