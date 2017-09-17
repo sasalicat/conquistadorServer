@@ -28,6 +28,7 @@ class Room(KBEngine.Entity):
 		self.Format.onMapBuild(self)
 	def InitTeamList(self,teamList):
 		self.teamList=teamList
+		self.alivelist=[]
 		for t in teamList:
 			self.alivelist.append(True)
 		DEBUG_MSG("InitTeamList OK alivelist:{0}".format(self.alivelist))
