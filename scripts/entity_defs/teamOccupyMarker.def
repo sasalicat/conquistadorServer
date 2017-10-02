@@ -1,0 +1,22 @@
+<root>
+	<Properties>
+	</Properties>
+
+	<ClientMethods>
+		<updateTeam1>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+		</updateTeam1>
+		<updateTeam2>
+			<Arg>	INT8	</Arg>
+			<Arg>	INT8	</Arg>
+		</updateTeam2>
+	</ClientMethods>
+
+	<BaseMethods>
+	</BaseMethods>
+
+	<CellMethods>
+	</CellMethods>
+
+</root>

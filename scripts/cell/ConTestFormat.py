@@ -5,6 +5,7 @@ class Team_Format_Occupy:
 	centerArea=None;
 	point_team1=0;
 	point_team2=0;
+	marker=None
 	inArea=None
 	def createFinish(self,eid):
 		DEBUG_MSG("createFinish")
@@ -17,6 +18,8 @@ class Team_Format_Occupy:
 		newone=KBEngine.createEntity("Area",room.spaceID,(0.0,0.0,0.0),(0.0,0.0,0.0),{"position":(0,0,0),"SpaceId":room.id,"radius":3000,"SpaceId":room.id,"RoomId":room.id})
 		DEBUG_MSG("GetList onmapbuild{0}".format(newone.GetList(True)))
 		self.centerArea=newone
+	def onLoadFinish(self,room):
+		self.marker=KBEngine.createEntity("teamOccupyMarker",room.spaceID,room.position,(0.0,0.0,0.0))
 	def onEnitityCreated(self,entity):
 		if entity.className=="Area":
 			self.centerArea=entity
@@ -39,8 +42,10 @@ class Team_Format_Occupy:
 						team2_in+=1
 				if team1_in==0 and team2_in!=0:
 					self.point_team1+=1
+					self.marker.allClients.updateTeam1(60,self.point_team1)
 				elif team1_in!=0 and team2_in==0:
 					self.point_team2+=1
+					self.marker.allClients.updateTeam2(60,self.point_team2)
 				DEBUG_MSG("team1 point:{0} team2 point {1}".format(self.point_team1,self.point_team2))
 		if self.point_team1>=60:
 			room.base.gameOver(1)

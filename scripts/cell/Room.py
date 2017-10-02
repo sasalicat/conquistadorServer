@@ -49,3 +49,5 @@ class Room(KBEngine.Entity):
 			self.alivelist[roomNo]=False
 		else:
 			self.alivelist[roomNo]=True
+	def clientLoadFinish(self):
+		self.Format.onLoadFinish(self)

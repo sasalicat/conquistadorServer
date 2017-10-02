@@ -69,6 +69,8 @@
 				 ARRAY <of> INT8 </of>
 			</Arg>
 		</InitTeamList>
+		<clientLoadFinish>
+		</clientLoadFinish>
 	</CellMethods>
 
 </root>

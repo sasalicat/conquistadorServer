@@ -155,6 +155,7 @@ class Room(KBEngine.Base):
 			KBEngine.entities[item.playerGamingId].client.getFinish(roomId)
 		if self.finishNum >=len(self.Playerlist):
 			self.intervalTimer=self.addTimer(0.1,0.1,1)
+			self.cell.clientLoadFinish()
 			DEBUG_MSG("addTimer interval...")
 	def onTimer( self, timerHandle, userData ):
 		if userData==1:#间隔触发
