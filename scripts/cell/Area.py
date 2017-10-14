@@ -15,8 +15,8 @@ class Area(KBEngine.Entity):
 	def ExitArea(self,expose,No):
 		self.insideNo.remove(No)
 	def GetList(self,expose):
-		DEBUG_MSG("in getlist:")
-		DEBUG_MSG(self.insideNo)
+		#DEBUG_MSG("in getlist:")
+		#DEBUG_MSG(self.insideNo)
 		return self.insideNo
 	def addobserver(self,obs):
 		observers.append(obs)

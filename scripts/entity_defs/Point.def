@@ -1,0 +1,23 @@
+<root>
+	<Properties>
+		<kind>
+			<Type>	INT8		</Type>
+			<Flags>	ALL_CLIENTS	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</kind>
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+
+	<BaseMethods>
+	</BaseMethods>
+
+	<CellMethods>
+		<notifyAbate>
+			<Exposed/>
+		</notifyAbate>
+	</CellMethods>
+
+</root>

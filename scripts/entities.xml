@@ -14,4 +14,5 @@
 	<Obstacle hasClient="true" hasCell="true" hasBase="true"></Obstacle>
 	<Area hasClient="true" hasCell="true" hasBase="true"></Area>
 	<teamOccupyMarker  hasClient="true" hasCell="true" hasBase="true"></teamOccupyMarker>
+	<Point  hasClient="true" hasCell="true" hasBase="true"></Point>
 </root>

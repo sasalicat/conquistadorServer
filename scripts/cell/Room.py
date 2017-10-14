@@ -51,3 +51,5 @@ class Room(KBEngine.Entity):
 			self.alivelist[roomNo]=True
 	def clientLoadFinish(self):
 		self.Format.onLoadFinish(self)
+	def onDestroy( self ):#当自己被销毁时
+		self.destroySpace()#销毁管辖的空间
