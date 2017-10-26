@@ -114,6 +114,7 @@
 		<createObstracle>
 			<Arg>	VECTOR3	</Arg>
 			<Arg>	INT8	</Arg>
+			<Arg>	INT16	</Arg>
 			<Exposed/>
 		</createObstracle>
 		<changeToAccount>
