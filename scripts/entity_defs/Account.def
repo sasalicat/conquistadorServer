@@ -20,7 +20,7 @@
 		</RoomNo>
 		<RoleList>
 			<Type>	ARRAY <of> RoleData </of>		</Type>
-			<Flags>	BASE_AND_CLIENT	</Flags>
+			<Flags>	BASE	</Flags>
 			<Default>	None	</Default>
 			<Persistent>	true	</Persistent>
 		</RoleList>
@@ -51,6 +51,9 @@
 		</AddARoomInfo>
 		<changeToWar>
 		</changeToWar>
+		<setRoleList>
+		<Arg>	ARRAY <of> RoleData </of>		</Arg>
+		</setRoleList>
 	</ClientMethods>
 
 	<BaseMethods>

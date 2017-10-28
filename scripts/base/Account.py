@@ -10,7 +10,7 @@ class Account(KBEngine.Proxy):
 		DEBUG_MSG("roleList:{0} length:{1}".format(self.RoleList,len(self.RoleList)))
 		DEBUG_MSG("one:{0} two{1} what?{2}".format(self.RoleList==None,len(self.RoleList)==0,len(self.RoleList)))
 		if(self.RoleList==None or len(self.RoleList)==0):#刚创建帐号,没有角色
-			firstRole=RoleCreater.createRoleRandom()
+			firstRole=RoleCreater.getDefaultRole()
 			self.RoleList=[firstRole]
 			self.writeToDB()
 			DEBUG_MSG("Account _init_ first is{0}".format(self.RoleList[0]))
@@ -35,6 +35,7 @@ class Account(KBEngine.Proxy):
 		#	KBEngine.baseAppData['first']=self
 		#else:
 		#	self.createCellEntity(KBEngine.baseAppData['first'].cell)
+		self.client.setRoleList(self.RoleList)
 		if self.InWhichRoomEntityId == -1:#第一次初始化
 			KBEngine.globalData["Hall"].addPlayer(self)
 			DEBUG_MSG("account init!!!")#在大廳添加玩家!!!!
@@ -122,7 +123,9 @@ class Account(KBEngine.Proxy):
 	def reRandomRole(self):
 		self.RoleList[0]=RoleCreater.createRoleRandom()
 		self.RoleList=self.RoleList
+		self.client.setRoleList(self.RoleList)
 		DEBUG_MSG("changeRoleList {0}".format(self.RoleList))
 	def identifyRole(self):
 		newRole=RoleCreater.createRoleRandom();
 		self.RoleList=[newRole]+self.RoleList;
+		self.client.setRoleList(self.RoleList)

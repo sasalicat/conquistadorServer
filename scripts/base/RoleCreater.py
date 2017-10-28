@@ -1,10 +1,10 @@
 import random
 
-roleRange=[0,1,2,3,4,5,6]
-activeEquipment=[4,5,10,11,20,24,27,28]
-passiveEquipment=[12,13,14,25,26]
-UniquePass=[12,13,14,25,26]
-Role=[[0,50],[2,3],[6,7],[8,9],[15,16],[17,18],[19],[42,43],[40,41],[44,45],[48,49]]
+roleRange=[0,1,2,3,4,5,7,8,9,10]
+activeEquipment=[4,5,10,11,20,24,27,52,53,54,55,56,57]
+passiveEquipment=[12,13,14,21,22,23,25,26,28,29,30,31,32,33,34,35,36,37,38,39,51]
+UniquePass=[12,13,14,25,26,32,33,34]
+Role=[[0,50],[2,3],[6,7],[8,9],[15,16],[17,18],[19],[42,43],[40,41],[44,45],[46,47]]
 
 def	createRoleRandom():
 	roleNo=random.choice(roleRange)
@@ -26,5 +26,9 @@ def	createRoleRandom():
 			print("enter ans in")
 			passive.remove(ans)
 	print('final ans is{0}'.format(roleSkill))
+	return {"kind":roleNo,"equipmentNos":roleSkill}
+def getDefaultRole():#獲得預設的新手角色
+	roleNo=9;
+	roleSkill=[44,45,54,55,56,29,21,22,23,51]
 	return {"kind":roleNo,"equipmentNos":roleSkill}
 #createRoleRandom()
