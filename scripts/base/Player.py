@@ -8,11 +8,12 @@ class Player(KBEngine.Proxy):
 		self.noClient=False
 		
 	def onClientDeath(self):
-		KBEngine.entities[self.InWhichRoomEntityId].PlayerLeaveRoom(self.id)
+		DEBUG_MSG("id{0} cell!=None-----------------------------".format(self.id))
 		self.noClient=True
+		KBEngine.entities[self.InWhichRoomEntityId].PlayerLeaveRoom(self.id)
+		
 		if self.cell!=None:#如果已经有cell实体则删除cell实体
-			DEBUG_MSG("cell!=None-----------------------------")
-			self.destroyCellEntity()
+			pass
 		else:
 			self.destroy()#销毁自己
 		KBEngine.entities[self.selfsAccountId].onClientDeath()
@@ -54,7 +55,7 @@ class Player(KBEngine.Proxy):
 		KBEngine.entities[self.selfsAccountId].InWhichRoomEntityId=-1#设置Account的inwhichroomEntityId
 		self.InWhichRoomEntityId=-1#设置为-1和掉线做区分
 		self.giveClientTo(KBEngine.entities[self.selfsAccountId])
-		self.destroyCellEntity()
+		#self.destroyCellEntity()#又PlayerLeaveRoom删除
 		DEBUG_MSG("compulsive Leave!!!")
 	
 	def createObstracle(self,position,kind,hp):

@@ -64,6 +64,7 @@ class Room(KBEngine.Base):
 
 
 	def LeaveRoom(self,PlayId):#被Account.py呼叫
+		DEBUG_MSG("LeaveRoom be Call")
 		for item in self.Playerlist:
 			if item.playerId==PlayId:
 				tempid=item.roomNo
@@ -85,21 +86,26 @@ class Room(KBEngine.Base):
 		#else:
 			#self.updateOut()
 	def PlayerLeaveRoom(self,playId):#用于游戏中强制退出房间,被Player.py呼叫
+		roomNo=-1;
 		for item in self.Playerlist:
 			if item.playerGamingId == playId:
+				roomNo=item.roomNo
 				self.Playerlist.remove(item)
 				self.roomNoPoor.append(item.roomNo)
 				self.hall.delPlayer(KBEngine.entities[item.playerId])
 				break
+		for item in self.Playerlist:
+			KBEngine.entities[item.playerGamingId].client.receiveLeave(roomNo)
 		self.updateOut()
 		if len(self.Playerlist)<1:#如果房间已经没有人
 			if self.cell!=None:#如果已经有cell实体则删除cell实体
-				self.destroyCellEntity()
-				
+				#self.destroyCellEntity()
+				self.cell.destroyItSpace()
 			else:
 				self.destroy()#销毁自己
 				self.hall.wirteOffRoom(self.roomId)#向大厅注销自己
-				
+		else:#如果房间已经没有人cell会随着空间销毁所消耗,还有人的话在这里销毁
+			KBEngine.entities[playId].destroyCellEntity()
 	def onLoseCell( self ):
 		self.destroy()
 		self.hall.wirteOffRoom(self.roomId)#向大厅注销自己

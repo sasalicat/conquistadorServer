@@ -71,6 +71,8 @@
 		</InitTeamList>
 		<clientLoadFinish>
 		</clientLoadFinish>
+		<destroyItSpace>
+		</destroyItSpace>
 	</CellMethods>
 
 </root>

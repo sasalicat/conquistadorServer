@@ -86,6 +86,9 @@
 			<Arg>	VECTOR3	</Arg>
 			<Arg>	INT8	</Arg>
 		</receiveSynchro>
+		<receiveLeave>
+			<Arg>	INT8	</Arg>
+		</receiveLeave>
 	</ClientMethods>
 
 	<BaseMethods>
