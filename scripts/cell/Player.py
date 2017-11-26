@@ -28,6 +28,9 @@ class Player(KBEngine.Entity):
 		self.allClients.receive5(treaterNo,treatNum,randomNum)
 	def notifyDied(self,expose,code):
 		KBEngine.entities[self.InWhichRoomEntityId].setDied(self.roomNo,code)
+	def notifyShift(self,startL,Loc,time):
+		randomNum=random.randint(0,99)
+		self.allClients.receive5(startL,Loc,time,randomNum)
 	def setRoomId(self,roomId):
 		DEBUG_MSG("set roomId %d" %roomId)
 		self.InWhichRoomEntityId=roomId

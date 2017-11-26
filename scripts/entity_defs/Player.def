@@ -66,6 +66,12 @@
 			<Arg>	INT16	</Arg>
 			<Arg>	INT8	</Arg>
 		</receive5>
+		<receiveShift>
+			<Arg>	VECTOR2	</Arg>
+			<Arg>	VECTOR2	</Arg>
+			<Arg>	FLOAT	</Arg>
+			<Arg>	INT8	</Arg>
+		</receiveShift>
 		<getFinish>
 			<Arg>	INT8	</Arg>
 		</getFinish>
@@ -174,6 +180,12 @@
 			<Arg>	INT8	</Arg>
 			<Exposed/>
 		</notifyDied>
+		<notifyShift>
+			<Arg>	VECTOR2	</Arg>
+			<Arg>	VECTOR2	</Arg>
+			<Arg>	FLOAT	</Arg>
+			<Exposed/>
+		</notifyShift>
 		<setRoomId>
 			<Arg>	INT32	</Arg>
 		</setRoomId>
