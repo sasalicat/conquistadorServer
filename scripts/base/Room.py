@@ -29,7 +29,7 @@ class Room(KBEngine.Base):
 
 		self.updateOut()
 	def updateOut(self):
-		self.hall.updateRoom(self.roomId,self.roomName,len(self.Playerlist))
+		self.hall.updateRoom(self.roomId,self.roomName,len(self.Playerlist),self.Gaming)
 		
 	def sendAllPlayerInfo(self,playerId,newRoomNo):
 		list=[]
@@ -40,6 +40,9 @@ class Room(KBEngine.Base):
 		
 		
 	def EnterRoom(self,newPlayerId,rolekind,equipmentList):
+		if(len(self.Playerlist)>=6 or self.Gaming>0):#如果人數已滿或正在遊戲則否決
+			#DEBUG_MSG("deny with {0} and {1}".format(len(self.Playerlist)>=6,self.Gaming))
+			return
 		DEBUG_MSG("enter room id is %d" %newPlayerId)
 		#DEBUG_MSG("entity typr is{0}".format(isinstance(KBEngine.entities[newPlayerId],Account.Account)))
 		#和hall一樣,檢查編號池裏面有沒有編號,如果有,優先使用閒置編號否則賦值玩家列表長度,即編號最大玩家的下一個編號
@@ -127,6 +130,9 @@ class Room(KBEngine.Base):
 				allReady=False
 		#開始遊戲
 		if allReady and self.Format.onAllReady(self):
+			#切換gaming到大於0
+			self.Gaming=1
+			self.updateOut()
 			#创造障碍物
 			for i in range(len(locationData.obstacleKind)):
 				KBEngine.createBaseAnywhere("Obstacle",{"position":locationData.obstacleLocation[i],"SpaceId":self.id,"kind":locationData.obstacleKind[i]})

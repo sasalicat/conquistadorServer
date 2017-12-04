@@ -48,12 +48,13 @@ class Hall(KBEngine.Base):
 		for item in  self.playerInHallIds:
 			#DEBUG_MSG(KBEngine.entities[self.playerIds[i]])
 			KBEngine.entities[item].sendNumToClient(len(self.playerInHallIds))
-	def updateRoom(self,roomNo,roomName,playerNum):
+	def updateRoom(self,roomNo,roomName,playerNum,gaming):
 		for item in self.rooms:
 			if item.roomNo==roomNo:
 				item.name=roomName
 				item.num=playerNum
-		data={'roomId':roomNo,'roomName':roomName,'playerNum':playerNum}
+				item.gaming=gaming
+		data={'roomId':roomNo,'roomName':roomName,'playerNum':playerNum,'gaming':gaming}
 		DEBUG_MSG(self.playerIds)
 		for pid in self.playerInHallIds:
 			DEBUG_MSG("in updateRoom pid is %d" %pid)
@@ -63,7 +64,7 @@ class Hall(KBEngine.Base):
 		if(len(self.roomNoPoor)>0):#如果roomNoPoor有剩余优先使用roomNoPoor
 			newNo=self.roomNoPoor.pop(0)
 		newRoom=KBEngine.createBaseLocally("Room",{"roomName":roomName,"roomId":newNo,"masterId":playerId,"masterKind":roleKind,"mequipmentList":equipmentList})
-		self.rooms.append(RoomInformation(newRoom.id,newNo,roomName,1))
+		self.rooms.append(RoomInformation(newRoom.id,newNo,roomName,1,-1))
 		return newRoom.id;
 	def wirteOffRoom(self,roomNo):#此方法用来在删除放假时,释放roomNo进idPoor,roomNo为room在创造时获得的roomNo
 		DEBUG_MSG("注销房间")
@@ -76,7 +77,7 @@ class Hall(KBEngine.Base):
 	def sendRoomInfos(self,asker):#asker是Account形態
 		list=[]
 		for item in self.rooms:
-			data={"roomId":item.roomNo,"roomName":item.name,"playerNum":item.num}
+			data={"roomId":item.roomNo,"roomName":item.name,"playerNum":item.num,"gaming":item.gaming}
 			list.append(data)
 		datas={"list":list}
 		asker.client.getRoomList(datas)

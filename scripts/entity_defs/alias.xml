@@ -10,6 +10,9 @@
 			<playerNum>
 				<Type> INT8  </Type>
 			</playerNum>
+			<gaming>
+				<Type> INT8  </Type>
+			</gaming>
 		</Properties>
 	</RoomInfo>
 	

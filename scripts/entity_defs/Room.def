@@ -47,6 +47,12 @@
 			<Default>	1	</Default>
 			<Persistent>	false	</Persistent>
 		</Playerdatas>
+		<Gaming>
+			<Type>	INT8		</Type>
+			<Flags>	BASE	</Flags>
+			<Default>	-1	</Default>
+			<Persistent>	false	</Persistent>
+		</Gaming>
 	</Properties>
 
 	<ClientMethods>
