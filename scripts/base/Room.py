@@ -194,6 +194,8 @@ class Room(KBEngine.Base):
 			KBEngine.entities[item.playerGamingId].changeToAccount()
 		self.resetRoom()
 		self.cell.cleanAllEntity()
+		self.Gaming=-1
+		self.updateOut()
 	def ChangeTeam(self,roomNo):
 		self.Format.onChangeTeam(self,roomNo)
 	def	FormatCreated(self,eid):
